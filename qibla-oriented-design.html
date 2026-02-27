@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Qibla-Oriented Design | Dar Al-Sakina</title>
+<meta name="description" content="Every home at Dar Al-Sakina includes a dedicated prayer room precisely aligned to the qibla, with a built-in wudu station."/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="site.css"/>
+<style>
+.hero-img-qd { background-image: url('https://images.unsplash.com/photo-JFirQekVo3U?w=1600&q=85&fit=crop'); }
+
+/* PRINCIPLES */
+.principles-band { background: var(--teal-dark); padding: 90px 80px; }
+.principles-band .inner { max-width: 1160px; margin: 0 auto; }
+.principles-heading { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem,3.5vw,2.8rem); color: #fff; font-weight: 400; margin-bottom: 52px; }
+.principles-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 28px; }
+.principle { border: 1px solid rgba(255,255,255,.1); border-radius: 4px; padding: 38px 28px; transition: all .3s; }
+.principle:hover { background: rgba(255,255,255,.05); border-color: var(--gold); }
+.principle-icon { font-size: 2.2rem; margin-bottom: 18px; }
+.principle h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.28rem; color: var(--gold-light); margin-bottom: 12px; }
+.principle p { font-size: .82rem; color: rgba(255,255,255,.52); line-height: 1.8; }
+
+/* WALKTHROUGH */
+.wt-step { display: grid; grid-template-columns: 64px 1fr 1fr; gap: 44px; align-items: center; padding: 44px 0; border-bottom: 1px solid #ede8df; }
+.wt-step:last-child { border-bottom: none; }
+.wt-num { font-family: 'Cormorant Garamond', serif; font-size: 3.8rem; color: var(--gold-light); font-weight: 300; line-height: 1; }
+.wt-text h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; color: var(--teal-dark); margin-bottom: 10px; }
+.wt-text p { font-size: .85rem; color: var(--text-light); line-height: 1.8; }
+.wt-img { border-radius: 4px; overflow: hidden; height: 180px; }
+.wt-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s; }
+.wt-step:hover .wt-img img { transform: scale(1.05); }
+
+/* ARABIC BAND */
+.arabic-band { background: linear-gradient(160deg, #1a3a3a, var(--teal)); padding: 80px; text-align: center; }
+.arabic-display { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem,5vw,3.8rem); color: var(--gold-light); direction: rtl; margin-bottom: 18px; line-height: 1.45; }
+.arabic-trans { font-size: .85rem; color: rgba(255,255,255,.55); letter-spacing: .15em; text-transform: uppercase; margin-bottom: 6px; }
+.arabic-src { font-size: .76rem; color: rgba(255,255,255,.3); letter-spacing: .1em; }
+
+/* SPECS ROW */
+.specs-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 2px; background: var(--gold-light); margin-top: 52px; }
+.spec-cell { background: var(--cream); padding: 36px 22px; text-align: center; transition: background .3s; }
+.spec-cell:hover { background: #fff; }
+.spec-cell .icon { font-size: 2rem; margin-bottom: 12px; }
+.spec-cell h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--teal-dark); margin-bottom: 8px; }
+.spec-cell p { font-size: .76rem; color: var(--text-light); line-height: 1.7; }
+
+@media (max-width: 900px) {
+  .principles-grid { grid-template-columns: 1fr 1fr; }
+  .wt-step { grid-template-columns: 1fr; gap: 16px; }
+  .wt-num { font-size: 2.2rem; }
+  .specs-row { grid-template-columns: 1fr 1fr; }
+  .principles-band { padding: 64px 24px; }
+  .arabic-band { padding: 56px 24px; }
+}
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">Dar Al-<span>Sakina</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li class="nav-item has-dropdown">
+      <a href="index.html#community" class="active">Community</a>
+      <div class="dropdown">
+        <div class="dd-header"><strong>Our Homes</strong><small>20 thoughtfully designed residences</small></div>
+        <div class="dd-list">
+          <a href="single-family-homes.html" class="dd-item">
+            <div class="dd-thumb"><img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=180&q=80&fit=crop" alt="" loading="lazy"/></div>
+            <div class="dd-body"><div class="dd-title">&#x1F3E1; Single-Family Homes</div><div class="dd-desc">Private, accessible homes with wide doorways and step-free entries.</div></div>
+          </a>
+          <div class="dd-sep"></div>
+          <a href="private-gardens.html" class="dd-item">
+            <div class="dd-thumb"><img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=180&q=80&fit=crop" alt="" loading="lazy"/></div>
+            <div class="dd-body"><div class="dd-title">&#x1F33F; Private Gardens</div><div class="dd-desc">A personal garden with every home for morning dhikr and quiet reflection.</div></div>
+          </a>
+          <div class="dd-sep"></div>
+          <a href="qibla-oriented-design.html" class="dd-item active">
+            <div class="dd-thumb"><img src="https://images.unsplash.com/photo-sOctm8gwAqQ?w=180&q=80&fit=crop" alt="" loading="lazy"/></div>
+            <div class="dd-body"><div class="dd-title">&#x1F54C; Qibla-Oriented Design</div><div class="dd-desc">Prayer rooms aligned to the qibla with a dedicated wudu area.</div></div>
+          </a>
+          <div class="dd-sep"></div>
+          <a href="accessible-living.html" class="dd-item">
+            <div class="dd-thumb"><img src="https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?w=180&q=80&fit=crop" alt="" loading="lazy"/></div>
+            <div class="dd-body"><div class="dd-title">&#x267F; Accessible Living</div><div class="dd-desc">Grab bars, curbless showers, and wide hallways for comfort and dignity.</div></div>
+          </a>
+        </div>
+        <div class="dd-footer"><small>Boutique community &#xB7; Maryland</small><a href="index.html#community">View all &#8594;</a></div>
+      </div>
+    </li>
+    <li><a href="index.html#amenities">Amenities</a></li>
+    <li><a href="index.html#life">Daily Life</a></li>
+    <li><a href="index.html#interest">Express Interest</a></li>
+  </ul>
+</nav>
+
+<header class="page-hero">
+  <div class="page-hero-img hero-img-qd"></div>
+  <div class="page-hero-content">
+    <div class="hero-crumb">
+      <a href="index.html">Dar Al-Sakina</a><span class="sep">&#8250;</span>
+      <a href="index.html#community">Community</a><span class="sep">&#8250;</span>
+      Qibla-Oriented Design
+    </div>
+    <h1>Wherever You Stand,<em style="color:var(--gold)">Mecca Is in Your Home.</em></h1>
+    <p>Prayer is the pillar of the faith. At Dar Al-Sakina, every home is precisely oriented toward the qibla &#8212; with a dedicated prayer room, a built-in wudu station, and every detail designed for khushu&#x02BC;.</p>
+  </div>
+</header>
+
+<!-- INTRO -->
+<div class="page-section" style="background:#fff">
+  <div class="inner intro-grid">
+    <div class="reveal">
+      <span class="label">The Prayer Room</span>
+      <h2 class="heading">A Dedicated Space for Salah</h2>
+      <div class="rule"></div>
+      <p class="body-text">In most homes, prayer happens in a corner of a bedroom &#8212; a space not designed for it. At Dar Al-Sakina, every home includes a dedicated prayer room. Not large, but purposeful. Designed for one thing: your connection with Allah.</p>
+      <br>
+      <p class="body-text">The room is precisely oriented with the qibla wall marked by a built-in mihrab alcove. It includes a wudu station with an accessible basin, storage for prayer garments, and natural light that creates a calm, steady atmosphere at every hour of the day.</p>
+    </div>
+    <figure class="intro-visual reveal">
+      <img src="https://images.unsplash.com/photo-fVawry7WP2g?w=800&q=85&fit=crop" alt="Grand Mosque prayer hall interior"/>
+      <figcaption>Illustrative prayer room design &#xB7; finishes may vary</figcaption>
+    </figure>
+  </div>
+</div>
+
+<!-- PRINCIPLES -->
+<div class="principles-band">
+  <div class="inner">
+    <div class="reveal"><span class="label" style="color:var(--gold-light)">Design Philosophy</span><h2 class="principles-heading">Three Principles of Islamic Space</h2></div>
+    <div class="principles-grid">
+      <div class="principle reveal">
+        <div class="principle-icon">&#x1F9ED;</div>
+        <h3>Qibla Orientation</h3>
+        <p>Each prayer room is calculated to the exact bearing for Mecca from our Maryland location &#8212; approximately 58&#xB0; northeast. The mihrab wall is built at this precise angle. No compass needed.</p>
+      </div>
+      <div class="principle reveal">
+        <div class="principle-icon">&#x1F4A7;</div>
+        <h3>Wudu by Design</h3>
+        <p>Purification before prayer is not an afterthought. Each room has an adjoining wudu station with a low-level accessible basin, non-slip floor, grab rail, and proper drainage &#8212; making tahara safe and dignified.</p>
+      </div>
+      <div class="principle reveal">
+        <div class="principle-icon">&#x1F319;</div>
+        <h3>Light &amp; Stillness</h3>
+        <p>The prayer room receives diffused natural light through a high clerestory window, avoiding glare at Fajr or Dhuhr. Warm off-white walls aid concentration. Acoustic separation keeps the room quiet.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WALKTHROUGH -->
+<div class="page-section" style="background:#fff">
+  <div class="inner">
+    <div class="reveal"><span class="label">Room by Room</span><h2 class="heading">A Walk Through the Prayer Space</h2></div>
+
+    <div class="wt-step reveal">
+      <div class="wt-num">01</div>
+      <div class="wt-text"><h3>Entry &amp; Shoe Storage</h3><p>A small vestibule at the entrance keeps outdoor shoes separate, maintaining the purity of the prayer space. A built-in bench with shoe storage below makes this transition easy for seniors.</p></div>
+      <div class="wt-img"><img src="https://images.unsplash.com/photo-sMB8l9j1PQ8?w=400&q=80&fit=crop" alt="Mosque entrance and foyer"/></div>
+    </div>
+
+    <div class="wt-step reveal">
+      <div class="wt-num">02</div>
+      <div class="wt-text"><h3>The Wudu Station</h3><p>An accessible low basin with lever-style taps, a grab rail, non-slip matting, and a fold-down seat. The wudu area is directly adjacent to the prayer room &#8212; you never walk far with wet feet.</p></div>
+      <div class="wt-img"><img src="https://images.unsplash.com/photo-Zg6bMZC5jL4?w=400&q=80&fit=crop" alt="Islamic architecture and prayer space"/></div>
+    </div>
+
+    <div class="wt-step reveal">
+      <div class="wt-num">03</div>
+      <div class="wt-text"><h3>The Mihrab Wall</h3><p>A subtly recessed alcove in the qibla wall serves as the mihrab &#8212; a visual focal point and tactile marker of direction. Finished in textured plaster with a gentle arch, referencing Islamic tradition without excess.</p></div>
+      <div class="wt-img"><img src="https://images.unsplash.com/photo-AOdx2ZTsnf8?w=400&q=80&fit=crop" alt="Man reciting Quran at mihrab"/></div>
+    </div>
+
+    <div class="wt-step reveal">
+      <div class="wt-num">04</div>
+      <div class="wt-text"><h3>Quran Shelf &amp; Storage</h3><p>A fitted alcove beside the mihrab stores rolled prayer rugs at accessible height, alongside a dedicated shelf for the Quran, tasbih, and prayer books &#8212; always at hand, never misplaced.</p></div>
+      <div class="wt-img"><img src="https://images.unsplash.com/photo-ceNCWYqL8DY?w=400&q=80&fit=crop" alt="Kaaba, Mecca — the qibla direction"/></div>
+    </div>
+  </div>
+</div>
+
+<!-- ARABIC BAND -->
+<div class="arabic-band">
+  <div class="arabic-display">&#x0641;&#x064E;&#x0623;&#x064E;&#x064A;&#x0652;&#x0646;&#x064E;&#x0645;&#x064E;&#x0627; &#x062A;&#x064F;&#x0648;&#x064E;&#x0644;&#x064F;&#x0651;&#x0648;&#x0627; &#x0641;&#x064E;&#x062B;&#x064E;&#x0645;&#x064E;&#x0651; &#x0648;&#x064E;&#x062C;&#x0652;&#x0647;&#x064F; &#x0627;&#x0644;&#x0644;&#x0651;&#x064E;&#x0647;&#x0650;</div>
+  <div class="arabic-trans">&#8220;Wherever you turn, there is the Face of Allah.&#8221;</div>
+  <div class="arabic-src">Qur&#x02BC;an 2:115</div>
+</div>
+
+<!-- SPECS ROW -->
+<div class="page-section" style="background:var(--cream)">
+  <div class="inner">
+    <div class="reveal"><span class="label">Room Specifications</span><h2 class="heading">Every Detail, Considered</h2></div>
+    <div class="specs-row">
+      <div class="spec-cell reveal"><div class="icon">&#x1F9ED;</div><h4>Precise Qibla</h4><p>Calibrated to the exact bearing from Maryland to Mecca (approx. 58&#xB0; NE)</p></div>
+      <div class="spec-cell reveal"><div class="icon">&#x1F4CF;</div><h4>Prayer Rug Sized</h4><p>Room comfortably fits 2 adults praying side by side</p></div>
+      <div class="spec-cell reveal"><div class="icon">&#x1F9F9;</div><h4>Easy-Clean Floors</h4><p>Warm-toned porcelain tile &#8212; hygienic and beautiful underfoot</p></div>
+      <div class="spec-cell reveal"><div class="icon">&#x1F50A;</div><h4>Acoustic Privacy</h4><p>Insulated walls keep adhan and recitation within the prayer room</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="page-section" style="background:#fff">
+  <div class="cta-block reveal">
+    <span class="label">Join Our Community</span>
+    <h2 class="heading">A Home Built Around Your Faith</h2>
+    <div class="rule" style="margin:18px auto"></div>
+    <p class="body-text" style="text-align:center;margin:0 auto">Dar Al-Sakina is accepting founding resident interest. We&#x2019;d love to tell you more.</p>
+    <div class="cta-btns">
+      <a href="index.html#interest" class="btn btn-gold">Express Interest</a>
+      <a href="index.html"          class="btn btn-outline-teal">Back to Home</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">Dar Al-<span>Sakina</span></div>
+  <div class="footer-tagline">A House of Tranquility &#xB7; Maryland</div>
+  <ul class="footer-nav">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="single-family-homes.html">Homes</a></li>
+    <li><a href="private-gardens.html">Gardens</a></li>
+    <li><a href="qibla-oriented-design.html">Prayer Rooms</a></li>
+    <li><a href="accessible-living.html">Accessibility</a></li>
+    <li><a href="index.html#amenities">Amenities</a></li>
+    <li><a href="index.html#interest">Contact</a></li>
+  </ul>
+  <div class="footer-copy">&#169; 2025 Dar Al-Sakina. All rights reserved. &#xB7; Maryland, USA</div>
+</footer>
+
+<script>
+  var navbar=document.getElementById('navbar');
+  window.addEventListener('scroll',function(){navbar.classList.toggle('scrolled',window.scrollY>60);});
+  var observer=new IntersectionObserver(function(entries){entries.forEach(function(e,i){if(e.isIntersecting){setTimeout(function(){e.target.classList.add('visible');},i*70);observer.unobserve(e.target);}});},{threshold:0.1});
+  document.querySelectorAll('.reveal').forEach(function(el){observer.observe(el);});
+</script>
+</body>
+</html>
