@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Accessible Living | Dar Al-Sakina</title>
+<meta name="description" content="Universal design built into every Dar Al-Sakina home — independence, comfort, and dignity at every stage of life."/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="site.css"/>
+<style>
+.hero-img-al { background-image: url('https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1600&q=85&fit=crop'); }
+
+/* NUMBERS BAND */
+.numbers-band { background: var(--cream); border-top: 2px solid var(--gold-light); border-bottom: 2px solid var(--gold-light); padding: 60px 80px; }
+.numbers-band .inner { max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: repeat(3,1fr); gap: 48px; }
+.num-item { text-align: center; }
+.num-big { font-family: 'Cormorant Garamond', serif; font-size: 3rem; color: var(--gold); font-weight: 300; line-height: 1; margin-bottom: 8px; }
+.num-label { font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; color: var(--teal-dark); margin-bottom: 6px; }
+.num-note { font-size: .82rem; color: var(--text-light); line-height: 1.6; }
+
+/* ROOM CARDS */
+.room-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 52px; }
+.room-card { border-radius: 4px; overflow: hidden; background: var(--cream); border: 1px solid #ede8df; transition: box-shadow .3s, transform .3s; }
+.room-card:hover { box-shadow: 0 12px 36px rgba(0,0,0,.09); transform: translateY(-4px); }
+.room-img { height: 200px; overflow: hidden; }
+.room-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s; }
+.room-card:hover .room-img img { transform: scale(1.05); }
+.room-body { padding: 26px; }
+.room-icon { font-size: 1.5rem; margin-bottom: 8px; }
+.room-body h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: var(--teal-dark); margin-bottom: 10px; }
+.room-body p { font-size: .84rem; color: var(--text-light); line-height: 1.8; margin-bottom: 14px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag { font-size: .7rem; background: #fff; border: 1px solid #ddd; border-radius: 2px; padding: 3px 9px; color: var(--text-light); letter-spacing: .05em; }
+
+/* CHECKLIST BAND */
+.checklist-band { background: var(--teal-dark); padding: 90px 80px; }
+.checklist-band .inner { max-width: 1160px; margin: 0 auto; }
+.checklist-heading { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem,3.5vw,2.8rem); color: #fff; font-weight: 400; margin-bottom: 52px; }
+.checklist-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+.checklist { display: flex; flex-direction: column; }
+.check-item { display: flex; align-items: flex-start; gap: 16px; padding: 18px 0; border-bottom: 1px solid rgba(255,255,255,.07); }
+.check-item:last-child { border-bottom: none; }
+.check-mark { width: 26px; height: 26px; background: rgba(201,169,110,.18); border: 1px solid var(--gold); border-radius: 2px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; font-size: .85rem; color: var(--gold); }
+.check-text h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; color: #fff; margin-bottom: 4px; }
+.check-text p { font-size: .79rem; color: rgba(255,255,255,.48); line-height: 1.65; }
+.checklist-photo { border-radius: 6px; overflow: hidden; aspect-ratio: 3/4; }
+.checklist-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+@media (max-width: 900px) {
+  .numbers-band .inner { grid-template-columns: 1fr; gap: 32px; }
+  .room-grid { grid-template-columns: 1fr; }
+  .checklist-grid { grid-template-columns: 1fr; gap: 40px; }
+  .numbers-band, .checklist-band { padding: 64px 24px; }
+}
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">Dar Al-<span>Sakina</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li class="nav-item has-dropdown">
+      <a href="index.html#community" class="active">Community</a>
+      <div class="dropdown">
+        <div class="dd-header"><strong>Our Homes</strong><small>20 thoughtfully designed residences</small></div>
+        <div class="dd-list">
+          <a href="single-family-homes.html" class="dd-item">
+            <div class="dd-thumb"><img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=180&q=80&fit=crop" alt="" loading="lazy"/></div>
+            <div class="dd-body"><div class="dd-title">&#x1F3E1; Single-Family Homes</div><div class="dd-desc">Private, accessible homes with wide doorways and step-free entries.</div></div>
+          </a>
+          <div class="dd-sep"></div>
+          <a href="private-gardens.html" class="dd-item">
+            <div class="dd-thumb"><img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=180&q=80&fit=crop" alt="" loading="lazy"/></div>
+            <div class="dd-body"><div class="dd-title">&#x1F33F; Private Gardens</div><div class="dd-desc">A personal garden with every home for morning dhikr and quiet reflection.</div></div>
+          </a>
+          <div class="dd-sep"></div>
+          <a href="qibla-oriented-design.html" class="dd-item">
+            <div class="dd-thumb"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Kaaba_Mirror_ed._edit.jpg/180px-Kaaba_Mirror_ed._edit.jpg" alt="" loading="lazy"/></div>
+            <div class="dd-body"><div class="dd-title">&#x1F54C; Qibla-Oriented Design</div><div class="dd-desc">Prayer rooms aligned to the qibla with a dedicated wudu area.</div></div>
+          </a>
+          <div class="dd-sep"></div>
+          <a href="accessible-living.html" class="dd-item active">
+            <div class="dd-thumb"><img src="https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?w=180&q=80&fit=crop" alt="" loading="lazy"/></div>
+            <div class="dd-body"><div class="dd-title">&#x267F; Accessible Living</div><div class="dd-desc">Grab bars, curbless showers, and wide hallways for comfort and dignity.</div></div>
+          </a>
+        </div>
+        <div class="dd-footer"><small>Boutique community &#xB7; Maryland</small><a href="index.html#community">View all &#8594;</a></div>
+      </div>
+    </li>
+    <li><a href="index.html#amenities">Amenities</a></li>
+    <li><a href="index.html#life">Daily Life</a></li>
+    <li><a href="payment.html">Payment</a></li>
+    <li><a href="index.html#interest">Express Interest</a></li>
+  </ul>
+</nav>
+
+<header class="page-hero">
+  <div class="page-hero-img hero-img-al"></div>
+  <div class="page-hero-content">
+    <div class="hero-crumb">
+      <a href="index.html">Dar Al-Sakina</a><span class="sep">&#8250;</span>
+      <a href="index.html#community">Community</a><span class="sep">&#8250;</span>
+      Accessible Living
+    </div>
+    <h1>Independence Without<em style="color:var(--gold)">Compromise.</em></h1>
+    <p>Accessibility at Dar Al-Sakina is not a modification &#8212; it is the foundation. Every dimension, surface, and transition was designed from the start so that life can be lived fully, safely, and with complete dignity.</p>
+  </div>
+</header>
+
+<!-- INTRO -->
+<div class="page-section" style="background:#fff">
+  <div class="inner intro-grid">
+    <div class="reveal">
+      <span class="label">Universal Design</span>
+      <h2 class="heading">Designed for Life, Not Limitation</h2>
+      <div class="rule"></div>
+      <p class="body-text">Our homes follow Universal Design principles &#8212; creating spaces usable by all people, at all ages and abilities, without adaptation. This means our accessibility features do not look like accessibility features. They look like good design.</p>
+      <br>
+      <p class="body-text">A wide doorway is also an elegant doorway. A curbless shower is also a beautiful shower. Lever door handles are also easy for arthritic hands. Everything works for everyone &#8212; without compromise to beauty or dignity.</p>
+    </div>
+    <figure class="intro-visual reveal">
+      <img src="https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?w=800&q=85&fit=crop" alt="Accessible bathroom design"/>
+      <figcaption>Accessible design that looks and feels beautiful</figcaption>
+    </figure>
+  </div>
+</div>
+
+<!-- NUMBERS -->
+<div class="numbers-band">
+  <div class="inner">
+    <div class="num-item reveal"><div class="num-big">36&#x22;</div><div class="num-label">Minimum Doorway Width</div><div class="num-note">All interior doorways meet ADA+ clearance for wheelchairs and walkers</div></div>
+    <div class="num-item reveal"><div class="num-big">0</div><div class="num-label">Thresholds &amp; Steps</div><div class="num-note">Zero-threshold transitions throughout &#8212; every surface flows into the next</div></div>
+    <div class="num-item reveal"><div class="num-big">100%</div><div class="num-label">Single Storey</div><div class="num-note">No stairs anywhere in any home &#8212; every room on one level, always</div></div>
+  </div>
+</div>
+
+<!-- ROOMS -->
+<div class="page-section" style="background:var(--cream)">
+  <div class="inner">
+    <div class="reveal"><span class="label">Room by Room</span><h2 class="heading">Accessibility in Every Space</h2></div>
+    <div class="room-grid">
+      <div class="room-card reveal">
+        <div class="room-img"><img src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=600&q=80&fit=crop" alt="Accessible bathroom"/></div>
+        <div class="room-body">
+          <div class="room-icon">&#x1F6BF;</div>
+          <h3>Bathroom</h3>
+          <p>A curbless wet room with a fold-down shower bench, integrated grab bars, anti-scald valve, hand-held showerhead, and a comfort-height toilet with side transfer space.</p>
+          <div class="tags"><span class="tag">Curbless shower</span><span class="tag">Grab bars</span><span class="tag">Fold-down bench</span><span class="tag">Anti-scald</span></div>
+        </div>
+      </div>
+      <div class="room-card reveal">
+        <div class="room-img"><img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=80&fit=crop" alt="Accessible kitchen"/></div>
+        <div class="room-body">
+          <div class="room-icon">&#x1F373;</div>
+          <h3>Kitchen</h3>
+          <p>Counter heights for seated cooking, pull-out storage instead of deep overhead cabinets, knee-clear space under the main prep area, lever-handle faucets, and a front-control hob.</p>
+          <div class="tags"><span class="tag">Knee-clear counter</span><span class="tag">Pull-out storage</span><span class="tag">Front-control hob</span><span class="tag">Lever faucets</span></div>
+        </div>
+      </div>
+      <div class="room-card reveal">
+        <div class="room-img"><img src="https://images.unsplash.com/photo-1560448204-603b3fc33ddc?w=600&q=80&fit=crop" alt="Accessible bedroom"/></div>
+        <div class="room-body">
+          <div class="room-icon">&#x1F6CF;&#xFE0F;</div>
+          <h3>Bedroom</h3>
+          <p>Sized for a full wheelchair turning circle, with bedside clearance on both sides, a low-threshold wardrobe, and a discreet wall-mounted call system near the bed.</p>
+          <div class="tags"><span class="tag">Turning circle</span><span class="tag">Dual bedside access</span><span class="tag">Call system</span><span class="tag">Low wardrobe</span></div>
+        </div>
+      </div>
+      <div class="room-card reveal">
+        <div class="room-img"><img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?w=600&q=80&fit=crop" alt="Accessible living room"/></div>
+        <div class="room-body">
+          <div class="room-icon">&#x1F6CB;&#xFE0F;</div>
+          <h3>Living Room</h3>
+          <p>Open-plan with no pinch points, slip-resistant flooring with surface contrast, rocker-style light switches at seated height, and wide sliding doors to the private garden.</p>
+          <div class="tags"><span class="tag">Open plan</span><span class="tag">Slip-resistant floor</span><span class="tag">Rocker switches</span><span class="tag">Wide garden doors</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CHECKLIST -->
+<div class="checklist-band">
+  <div class="inner">
+    <div class="reveal"><span class="label" style="color:var(--gold-light)">Our Commitment</span><h2 class="checklist-heading">Built Into Every Home</h2></div>
+    <div class="checklist-grid">
+      <div class="checklist">
+        <div class="check-item reveal"><div class="check-mark">&#x2713;</div><div class="check-text"><h4>Zero-Threshold Entry</h4><p>Front door and all room transitions are flush &#8212; no lips, no ramps, no barriers anywhere.</p></div></div>
+        <div class="check-item reveal"><div class="check-mark">&#x2713;</div><div class="check-text"><h4>Wide-Passage Hallways</h4><p>All corridors are a minimum 42 inches wide, allowing comfortable two-way movement with a walker or wheelchair.</p></div></div>
+        <div class="check-item reveal"><div class="check-mark">&#x2713;</div><div class="check-text"><h4>Reinforced Bathroom Walls</h4><p>Walls are blocking-reinforced during construction so grab bars can be added anywhere, at any time, without opening walls.</p></div></div>
+        <div class="check-item reveal"><div class="check-mark">&#x2713;</div><div class="check-text"><h4>Smart Emergency System</h4><p>Discreet pull-cord and button stations in the bathroom, bedroom, and front door, connected to our on-site wellness team.</p></div></div>
+        <div class="check-item reveal"><div class="check-mark">&#x2713;</div><div class="check-text"><h4>Non-Slip Flooring Throughout</h4><p>All flooring is slip-rated for wet and dry conditions. Visual contrast between surfaces helps residents with low vision navigate confidently.</p></div></div>
+        <div class="check-item reveal"><div class="check-mark">&#x2713;</div><div class="check-text"><h4>Keyless Smart Entry</h4><p>Keypad and app-based door entry eliminates keys for residents with limited dexterity, and lets trusted family members access remotely.</p></div></div>
+      </div>
+      <div class="checklist-photo reveal">
+        <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?w=600&q=85&fit=crop" alt="Accessible home interior"/>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- QUOTE -->
+<div class="quote-band" style="background:linear-gradient(135deg,var(--teal),var(--sage))">
+  <blockquote>&#8220;And your Lord has decreed that you be dutiful to your parents &#8212; whether one or both of them attain old age in your life, address them in terms of honor.&#8221;</blockquote>
+  <cite>&#8212; Qur&#x02BC;an 17:23</cite>
+</div>
+
+<!-- CTA -->
+<div class="page-section" style="background:#fff">
+  <div class="cta-block reveal">
+    <span class="label">Join Our Community</span>
+    <h2 class="heading">A Home for Every Stage of Life</h2>
+    <div class="rule" style="margin:18px auto"></div>
+    <p class="body-text" style="text-align:center;margin:0 auto">Our homes are built to grow with you. Express your interest and learn how Dar Al-Sakina supports dignified, independent living.</p>
+    <div class="cta-btns">
+      <a href="index.html#interest" class="btn btn-gold">Express Interest</a>
+      <a href="index.html"          class="btn btn-outline-teal">Back to Home</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">Dar Al-<span>Sakina</span></div>
+  <div class="footer-tagline">A House of Tranquility &#xB7; Maryland</div>
+  <ul class="footer-nav">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="single-family-homes.html">Homes</a></li>
+    <li><a href="private-gardens.html">Gardens</a></li>
+    <li><a href="qibla-oriented-design.html">Prayer Rooms</a></li>
+    <li><a href="accessible-living.html">Accessibility</a></li>
+    <li><a href="index.html#amenities">Amenities</a></li>
+    <li><a href="index.html#interest">Contact</a></li>
+  </ul>
+  <div class="footer-copy">&#169; 2025 Dar Al-Sakina. All rights reserved. &#xB7; Maryland, USA</div>
+</footer>
+
+<script>
+  var navbar=document.getElementById('navbar');
+  window.addEventListener('scroll',function(){navbar.classList.toggle('scrolled',window.scrollY>60);});
+  var observer=new IntersectionObserver(function(entries){entries.forEach(function(e,i){if(e.isIntersecting){setTimeout(function(){e.target.classList.add('visible');},i*70);observer.unobserve(e.target);}});},{threshold:0.1});
+  document.querySelectorAll('.reveal').forEach(function(el){observer.observe(el);});
+</script>
+</body>
+</html>

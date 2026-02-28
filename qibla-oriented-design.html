@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Qibla-Oriented Design | Dar Al-Sakina</title>
+<meta name="description" content="Every home at Dar Al-Sakina includes a dedicated prayer room precisely aligned to the qibla — with a built-in wudu station and every detail designed for khushu'."/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="site.css"/>
+<style>
+
+/* ══ HERO ══ */
+.hero-img-qd {
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Edited_Great_Mosque_of_Mecca1_5-2019-ccsa4.0.jpg/1600px-Edited_Great_Mosque_of_Mecca1_5-2019-ccsa4.0.jpg');
+  background-size: cover; background-position: center 30%;
+  /* fallback colour while image loads */
+  background-color: #060d0d;
+}
+.kaaba-hero-art { display:none; }
+
+/* ══ PRINCIPLES ══ */
+.principles-band { background: var(--teal-dark); padding: 90px 80px; }
+.principles-band .inner { max-width: 1160px; margin: 0 auto; }
+.principles-heading { font-family:'Cormorant Garamond',serif; font-size:clamp(2rem,3.5vw,2.8rem); color:#fff; font-weight:400; margin-bottom:52px; }
+.principles-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:28px; }
+.principle { border:1px solid rgba(255,255,255,.1); border-radius:4px; padding:38px 28px; transition:all .3s; }
+.principle:hover { background:rgba(255,255,255,.05); border-color:var(--gold); }
+.principle-icon { font-size:2.2rem; margin-bottom:18px; }
+.principle h3 { font-family:'Cormorant Garamond',serif; font-size:1.28rem; color:var(--gold-light); margin-bottom:12px; }
+.principle p { font-size:.82rem; color:rgba(255,255,255,.52); line-height:1.8; }
+
+/* ══ WALKTHROUGH ══ */
+.wt-step { display:grid; grid-template-columns:64px 1fr 1fr; gap:44px; align-items:center; padding:44px 0; border-bottom:1px solid #ede8df; }
+.wt-step:last-child { border-bottom:none; }
+.wt-num { font-family:'Cormorant Garamond',serif; font-size:3.8rem; color:var(--gold-light); font-weight:300; line-height:1; }
+.wt-text h3 { font-family:'Cormorant Garamond',serif; font-size:1.35rem; color:var(--teal-dark); margin-bottom:10px; }
+.wt-text p { font-size:.85rem; color:var(--text-light); line-height:1.8; }
+.wt-art { border-radius:6px; overflow:hidden; height:190px; background:#090f0a; }
+.wt-art svg { width:100%; height:100%; display:block; }
+.wt-step:hover .wt-art { box-shadow:0 8px 32px rgba(0,0,0,.18); }
+.wt-art img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .5s ease; }
+.wt-step:hover .wt-art img { transform:scale(1.05); }
+
+/* ══ INTRO VISUAL ══ */
+.intro-svg-wrap {
+  border-radius:6px; overflow:hidden; aspect-ratio:4/3; position:relative;
+  background:#090f0a;
+}
+.intro-svg-wrap svg { width:100%; height:100%; display:block; }
+.intro-svg-wrap figcaption {
+  position:absolute; bottom:0; left:0; right:0;
+  padding:14px 20px;
+  background:linear-gradient(to top,rgba(5,10,7,.85),transparent);
+  color:rgba(255,255,255,.6); font-size:.72rem; letter-spacing:.1em;
+}
+
+/* ══ KAABA GALLERY ══ */
+.kaaba-gallery { background:#05080a; padding:72px 80px; }
+.kaaba-gallery .inner { max-width:1160px; margin:0 auto; }
+.gallery-heading { font-family:'Cormorant Garamond',serif; font-size:clamp(1.8rem,3vw,2.5rem); color:#fff; font-weight:300; margin-bottom:8px; }
+.gallery-sub { font-size:.82rem; color:rgba(255,255,255,.38); margin-bottom:48px; letter-spacing:.06em; }
+.mosaic { display:grid; grid-template-columns:2fr 1fr 1fr; grid-template-rows:240px 240px; gap:10px; }
+.mosaic-cell { border-radius:4px; overflow:hidden; position:relative; background:#090f0a; }
+.mosaic-cell:first-child { grid-row:1/3; }
+.mosaic-cell svg { width:100%; height:100%; display:block; }
+.mosaic-cap {
+  position:absolute; bottom:0; left:0; right:0;
+  padding:10px 14px;
+  background:linear-gradient(to top,rgba(0,0,0,.72),transparent);
+  color:rgba(255,255,255,.5); font-size:.63rem; letter-spacing:.1em;
+}
+
+/* ══ ARABIC BAND ══ */
+.arabic-band { background:linear-gradient(160deg,#1a3a3a,var(--teal)); padding:80px; text-align:center; }
+.arabic-display { font-family:'Cormorant Garamond',serif; font-size:clamp(2.2rem,5vw,3.8rem); color:var(--gold-light); direction:rtl; margin-bottom:18px; line-height:1.45; }
+.arabic-trans { font-size:.85rem; color:rgba(255,255,255,.55); letter-spacing:.15em; text-transform:uppercase; margin-bottom:6px; }
+.arabic-src { font-size:.76rem; color:rgba(255,255,255,.3); letter-spacing:.1em; }
+
+/* ══ SPECS ══ */
+.specs-row { display:grid; grid-template-columns:repeat(4,1fr); gap:2px; background:var(--gold-light); margin-top:52px; }
+.spec-cell { background:var(--cream); padding:36px 22px; text-align:center; transition:background .3s; }
+.spec-cell:hover { background:#fff; }
+.spec-cell .icon { font-size:2rem; margin-bottom:12px; }
+.spec-cell h4 { font-family:'Cormorant Garamond',serif; font-size:1.1rem; color:var(--teal-dark); margin-bottom:8px; }
+.spec-cell p { font-size:.76rem; color:var(--text-light); line-height:1.7; }
+
+/* DD thumb css art */
+.dd-thumb-kaaba {
+  width:86px; height:72px; flex-shrink:0; overflow:hidden;
+  background:linear-gradient(165deg,#090f0a,#0d1e14);
+  display:flex; align-items:center; justify-content:center;
+}
+
+@media (max-width:1024px) {
+  .mosaic { grid-template-columns:1fr 1fr; grid-template-rows:auto; }
+  .mosaic-cell:first-child { grid-row:auto; }
+  .kaaba-gallery { padding:56px 32px; }
+}
+@media (max-width:900px) {
+  .principles-grid { grid-template-columns:1fr 1fr; }
+  .wt-step { grid-template-columns:1fr; gap:16px; }
+  .wt-num { font-size:2.2rem; }
+  .specs-row { grid-template-columns:1fr 1fr; }
+  .principles-band { padding:64px 24px; }
+  .arabic-band { padding:56px 24px; }
+}
+@media (max-width:768px) {
+  .mosaic { grid-template-columns:1fr; }
+  .mosaic-cell { height:220px; }
+  .kaaba-gallery { padding:48px 20px; }
+}
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">Dar Al-<span>Sakina</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li class="nav-item has-dropdown">
+      <a href="index.html#community" class="active">Community</a>
+      <div class="dropdown">
+        <div class="dd-header"><strong>Our Homes</strong><small>20 thoughtfully designed residences</small></div>
+        <div class="dd-list">
+          <a href="single-family-homes.html" class="dd-item">
+            <div class="dd-thumb"><img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=180&q=80&fit=crop" alt="" loading="lazy"/></div>
+            <div class="dd-body"><div class="dd-title">&#x1F3E1; Single-Family Homes</div><div class="dd-desc">Private, accessible homes with wide doorways and step-free entries.</div></div>
+          </a>
+          <div class="dd-sep"></div>
+          <a href="private-gardens.html" class="dd-item">
+            <div class="dd-thumb"><img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=180&q=80&fit=crop" alt="" loading="lazy"/></div>
+            <div class="dd-body"><div class="dd-title">&#x1F33F; Private Gardens</div><div class="dd-desc">A personal garden with every home for morning dhikr and quiet reflection.</div></div>
+          </a>
+          <div class="dd-sep"></div>
+          <a href="qibla-oriented-design.html" class="dd-item active">
+            <div class="dd-thumb"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Kaaba_Mirror_ed._edit.jpg/180px-Kaaba_Mirror_ed._edit.jpg" alt="Kaaba, Mecca" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"/></div>
+            <div class="dd-body"><div class="dd-title">&#x1F54C; Qibla-Oriented Design</div><div class="dd-desc">Prayer rooms aligned to the qibla with a dedicated wudu area.</div></div>
+          </a>
+          <div class="dd-sep"></div>
+          <a href="accessible-living.html" class="dd-item">
+            <div class="dd-thumb"><img src="https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?w=180&q=80&fit=crop" alt="" loading="lazy"/></div>
+            <div class="dd-body"><div class="dd-title">&#x267F; Accessible Living</div><div class="dd-desc">Grab bars, curbless showers, and wide hallways for comfort and dignity.</div></div>
+          </a>
+        </div>
+        <div class="dd-footer"><small>Boutique community &#xB7; Maryland</small><a href="index.html#community">View all &#8594;</a></div>
+      </div>
+    </li>
+    <li><a href="index.html#amenities">Amenities</a></li>
+    <li><a href="index.html#life">Daily Life</a></li>
+    <li><a href="payment.html">Payment</a></li>
+    <li><a href="index.html#interest">Express Interest</a></li>
+  </ul>
+</nav>
+
+<!-- ══ HERO ══ -->
+<header class="page-hero">
+  <div class="page-hero-img hero-img-qd">
+    <!-- Hero Kaaba SVG art — large, atmospheric, always visible -->
+    <div class="kaaba-hero-art">
+      <svg viewBox="0 0 500 420" width="72vmin" height="72vmin" xmlns="http://www.w3.org/2000/svg" style="max-width:580px;max-height:580px;opacity:.55">
+        <defs>
+          <radialGradient id="hg" cx="50%" cy="60%" r="55%">
+            <stop offset="0%" stop-color="rgba(201,169,110,.22)"/>
+            <stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+          </radialGradient>
+        </defs>
+        <!-- Ambient glow -->
+        <ellipse cx="250" cy="350" rx="200" ry="28" fill="rgba(201,169,110,.12)"/>
+        <rect width="500" height="420" fill="url(#hg)"/>
+        <!-- Left minaret -->
+        <rect x="28" y="90" width="20" height="240" fill="#0d1a0e" opacity=".7"/>
+        <polygon points="18,90 38,90 28,62" fill="#c9a96e" opacity=".65"/>
+        <circle cx="28" cy="57" r="6" fill="#c9a96e" opacity=".5"/>
+        <circle cx="28" cy="50" r="2.5" fill="#c9a96e" opacity=".7"/>
+        <!-- Right minaret -->
+        <rect x="452" y="90" width="20" height="240" fill="#0d1a0e" opacity=".7"/>
+        <polygon points="442,90 462,90 452,62" fill="#c9a96e" opacity=".65"/>
+        <circle cx="452" cy="57" r="6" fill="#c9a96e" opacity=".5"/>
+        <circle cx="452" cy="50" r="2.5" fill="#c9a96e" opacity=".7"/>
+        <!-- Small flanking minarets -->
+        <rect x="80" y="130" width="13" height="200" fill="#0c1608" opacity=".5"/>
+        <polygon points="74,130 87,130 80,110" fill="#c9a96e" opacity=".4"/>
+        <rect x="407" y="130" width="13" height="200" fill="#0c1608" opacity=".5"/>
+        <polygon points="401,130 414,130 407,110" fill="#c9a96e" opacity=".4"/>
+        <!-- Kaaba body (main cube) -->
+        <polygon points="100,380 100,150 250,78 400,150 400,380" fill="#0e2014" stroke="#c9a96e" stroke-width="2.5"/>
+        <!-- Roof face (lighter) -->
+        <polygon points="100,150 250,78 400,150 328,120 250,96 172,120" fill="#1c3420" stroke="#c9a96e" stroke-width="1.8"/>
+        <!-- Right face (darker) -->
+        <polygon points="250,78 400,150 400,380 345,365 345,112 250,94" fill="#0a1810" stroke="#c9a96e" stroke-width="1"/>
+        <!-- Kiswa gold band -->
+        <polygon points="100,218 100,250 400,250 400,218" fill="#c9a96e" opacity=".8"/>
+        <text x="250" y="239" text-anchor="middle" font-size="18" fill="#060e07" font-family="serif" opacity=".95">&#x0628;&#x0650;&#x0633;&#x0652;&#x0645;&#x0650; &#x0627;&#x0644;&#x0644;&#x0651;&#x064E;&#x0647;&#x0650; &#x0627;&#x0644;&#x0631;&#x064E;&#x0651;&#x062D;&#x0652;&#x0645;&#x064E;&#x0646;&#x0650; &#x0627;&#x0644;&#x0631;&#x064E;&#x0651;&#x062D;&#x0650;&#x064A;&#x0645;&#x0650;</text>
+        <!-- Door -->
+        <rect x="196" y="280" width="108" height="100" rx="5" fill="#080d08" stroke="#c9a96e" stroke-width="2.2"/>
+        <path d="M196,284 Q250,258 304,284" fill="none" stroke="#c9a96e" stroke-width="2"/>
+        <rect x="204" y="290" width="92" height="84" rx="3" fill="#080d08" stroke="#c9a96e" stroke-width=".9" stroke-dasharray="5 3"/>
+        <circle cx="208" cy="332" r="5" fill="#c9a96e" opacity=".9"/>
+        <circle cx="292" cy="332" r="5" fill="#c9a96e" opacity=".9"/>
+        <!-- Lower Kiswa fringe -->
+        <line x1="100" y1="358" x2="400" y2="358" stroke="#c9a96e" stroke-width="1.2" stroke-dasharray="6 4" opacity=".55"/>
+        <!-- Tawaf rings suggestion -->
+        <ellipse cx="250" cy="374" rx="170" ry="12" fill="none" stroke="#c9a96e" stroke-width=".6" opacity=".28" stroke-dasharray="7 5"/>
+        <ellipse cx="250" cy="378" rx="190" ry="15" fill="none" stroke="#c9a96e" stroke-width=".4" opacity=".16" stroke-dasharray="6 6"/>
+        <!-- Stars -->
+        <circle cx="80"  cy="22" r="2"   fill="#c9a96e" opacity=".8"/>
+        <circle cx="150" cy="12" r="1.5" fill="#c9a96e" opacity=".65"/>
+        <circle cx="250" cy="8"  r="2.5" fill="#c9a96e" opacity=".9"/>
+        <circle cx="350" cy="14" r="1.5" fill="#c9a96e" opacity=".6"/>
+        <circle cx="430" cy="20" r="2"   fill="#c9a96e" opacity=".7"/>
+        <circle cx="55"  cy="48" r="1.2" fill="#c9a96e" opacity=".5"/>
+        <circle cx="190" cy="32" r="1"   fill="#c9a96e" opacity=".4"/>
+        <circle cx="460" cy="46" r="1.2" fill="#c9a96e" opacity=".5"/>
+        <!-- Crescent and star -->
+        <path d="M380,28 Q398,16 414,30 Q396,22 380,28 Z" fill="#c9a96e" opacity=".9"/>
+        <circle cx="417" cy="24" r="4" fill="#c9a96e" opacity=".8"/>
+      </svg>
+    </div>
+  </div>
+  <div class="page-hero-content">
+    <div class="hero-crumb">
+      <a href="index.html">Dar Al-Sakina</a><span class="sep">&#8250;</span>
+      <a href="index.html#community">Community</a><span class="sep">&#8250;</span>
+      Qibla-Oriented Design
+    </div>
+    <h1>Wherever You Stand,<em style="color:var(--gold)">Mecca Is in Your Home.</em></h1>
+    <p>Prayer is the pillar of the faith. At Dar Al-Sakina, every home is precisely oriented toward the qibla &#8212; with a dedicated prayer room, a built-in wudu station, and every detail designed for khushu&#x02BC;.</p>
+  </div>
+</header>
+
+<!-- ══ INTRO ══ -->
+<div class="page-section" style="background:#fff">
+  <div class="inner intro-grid">
+    <div class="reveal">
+      <span class="label">The Prayer Room</span>
+      <h2 class="heading">A Dedicated Space for Salah</h2>
+      <div class="rule"></div>
+      <p class="body-text">In most homes, prayer happens in a corner of a bedroom &#8212; a space not designed for it. At Dar Al-Sakina, every home includes a dedicated prayer room. Not large, but purposeful. Designed for one thing: your connection with Allah.</p>
+      <br>
+      <p class="body-text">The room is precisely oriented with the qibla wall marked by a built-in mihrab alcove. It includes a wudu station with an accessible basin, storage for prayer garments, and natural light that creates a calm, steady atmosphere at every hour of the day.</p>
+    </div>
+
+    <!-- Real Kaaba photograph -->
+    <figure class="intro-visual reveal">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Kaaba_Mirror_ed._edit.jpg/800px-Kaaba_Mirror_ed._edit.jpg"
+           alt="The Holy Kaaba — House of God at the center of Masjid al-Haram, Mecca"
+           style="width:100%;height:100%;object-fit:cover;display:block"/>
+      <figcaption>The Holy Kaaba &#xB7; Masjid al-Haram, Mecca &#xB7; CC BY-SA</figcaption>
+    </figure>
+  </div>
+</div>
+
+<!-- ══ PRINCIPLES ══ -->
+<div class="principles-band">
+  <div class="inner">
+    <div class="reveal"><span class="label" style="color:var(--gold-light)">Design Philosophy</span><h2 class="principles-heading">Three Principles of Islamic Space</h2></div>
+    <div class="principles-grid">
+      <div class="principle reveal">
+        <div class="principle-icon">&#x1F9ED;</div>
+        <h3>Qibla Orientation</h3>
+        <p>Each prayer room is calculated to the exact bearing for Mecca from our Maryland location &#8212; approximately 58&#xB0; northeast. The mihrab wall is built at this precise angle. No compass needed.</p>
+      </div>
+      <div class="principle reveal">
+        <div class="principle-icon">&#x1F4A7;</div>
+        <h3>Wudu by Design</h3>
+        <p>Purification before prayer is not an afterthought. Each room has an adjoining wudu station with a low-level accessible basin, non-slip floor, grab rail, and proper drainage &#8212; making tahara safe and dignified.</p>
+      </div>
+      <div class="principle reveal">
+        <div class="principle-icon">&#x1F319;</div>
+        <h3>Light &amp; Stillness</h3>
+        <p>The prayer room receives diffused natural light through a high clerestory window, avoiding glare at Fajr or Dhuhr. Warm off-white walls aid concentration. Acoustic separation keeps the room quiet.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ KAABA GALLERY ══ -->
+<div class="kaaba-gallery">
+  <div class="inner">
+    <div class="reveal">
+      <span class="label">The Sacred Direction</span>
+      <h2 class="gallery-heading">The Kaaba &mdash; Heart of the Qibla</h2>
+      <p class="gallery-sub">Every salah at Dar Al-Sakina faces the same point: the Kaaba in Mecca, the first house built for the worship of Allah.</p>
+    </div>
+    <div class="mosaic">
+
+      <!-- Cell 1: Grand Mosque of Mecca – real photograph -->
+      <div class="mosaic-cell reveal">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Edited_Great_Mosque_of_Mecca1_5-2019-ccsa4.0.jpg/800px-Edited_Great_Mosque_of_Mecca1_5-2019-ccsa4.0.jpg"
+             alt="Aerial view of Masjid al-Haram — the Grand Mosque of Mecca with the Kaaba at its centre"
+             style="width:100%;height:100%;object-fit:cover;display:block"/>
+        <div class="mosaic-cap">The Holy Kaaba &middot; Masjid al-Haram, Mecca &middot; CC BY-SA 4.0</div>
+      </div>
+
+      <!-- Cell 2: Pilgrims performing Tawaf – real photograph -->
+      <div class="mosaic-cell reveal">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Kaaba%2C_Never_still.jpg/480px-Kaaba%2C_Never_still.jpg"
+             alt="Pilgrims performing Tawaf — circumambulating the Kaaba at Masjid al-Haram"
+             style="width:100%;height:100%;object-fit:cover;display:block"/>
+        <div class="mosaic-cap">Tawaf &mdash; circumambulation around the Kaaba &middot; CC BY-SA</div>
+      </div>
+
+      <!-- Cell 3: The Holy Kaaba close-up – real photograph -->
+      <div class="mosaic-cell reveal">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Mecca_Kaaba.JPG/480px-Mecca_Kaaba.JPG"
+             alt="Close-up view of the Holy Kaaba and Kiswa at Masjid al-Haram"
+             style="width:100%;height:100%;object-fit:cover;display:block"/>
+        <div class="mosaic-cap">The Kaaba &mdash; wrapped in the Kiswa, Mecca &middot; CC BY-SA</div>
+      </div>
+
+      <!-- Cell 4: Kiswa calligraphy panel -->
+      <div class="mosaic-cell reveal" style="background:#08100a;display:flex;align-items:center;justify-content:center">
+        <svg viewBox="0 0 220 140" width="90%" xmlns="http://www.w3.org/2000/svg">
+          <rect width="220" height="140" fill="#0a1208" rx="4"/>
+          <!-- Decorative frame -->
+          <rect x="5" y="5" width="210" height="130" fill="none" stroke="#c9a96e" stroke-width=".8" rx="3" opacity=".3" stroke-dasharray="7 5"/>
+          <!-- Corner ornaments -->
+          <polygon points="5,5  20,5  5,20"   fill="#c9a96e" opacity=".22"/>
+          <polygon points="215,5  200,5  215,20"  fill="#c9a96e" opacity=".22"/>
+          <polygon points="5,135  20,135  5,120"   fill="#c9a96e" opacity=".22"/>
+          <polygon points="215,135  200,135  215,120" fill="#c9a96e" opacity=".22"/>
+          <!-- Gold band (Kiswa) -->
+          <rect x="0" y="38" width="220" height="64" fill="#c9a96e" opacity=".14" rx="2"/>
+          <rect x="0" y="40" width="220" height="3"  fill="#c9a96e" opacity=".55"/>
+          <rect x="0" y="97" width="220" height="3"  fill="#c9a96e" opacity=".55"/>
+          <!-- Quranic inscription -->
+          <text x="110" y="66" text-anchor="middle" font-size="20" fill="#c9a96e" opacity=".92" font-family="serif">&#x0648;&#x064E;&#x0625;&#x0650;&#x0630;&#x0652; &#x062C;&#x064E;&#x0639;&#x064E;&#x0644;&#x0652;&#x0646;&#x064E;&#x0627; &#x0627;&#x0644;&#x0652;&#x0628;&#x064E;&#x064A;&#x0652;&#x062A;&#x064E;</text>
+          <text x="110" y="92" text-anchor="middle" font-size="20" fill="#c9a96e" opacity=".88" font-family="serif">&#x0645;&#x064E;&#x062B;&#x064E;&#x0627;&#x0628;&#x064E;&#x0629;&#x064B; &#x0644;&#x0650;&#x0644;&#x0646;&#x064E;&#x0651;&#x0627;&#x0633;&#x0650;</text>
+          <!-- Source label -->
+          <text x="110" y="124" text-anchor="middle" font-size="8" fill="rgba(201,169,110,.45)" font-family="serif" letter-spacing="1">QUR&#x02BC;AN 2:125 &middot; KISWA INSCRIPTION</text>
+        </svg>
+        <div class="mosaic-cap">The Kiswa &mdash; black silk embroidered cloth of the Kaaba</div>
+      </div>
+
+      <!-- Cell 5: Qibla compass -->
+      <div class="mosaic-cell reveal" style="background:#070d09;display:flex;align-items:center;justify-content:center">
+        <svg viewBox="0 0 220 220" width="85%" xmlns="http://www.w3.org/2000/svg">
+          <!-- Outer ring -->
+          <circle cx="110" cy="110" r="100" fill="#090e09" stroke="#c9a96e" stroke-width="1.5"/>
+          <circle cx="110" cy="110" r="88"  fill="none"   stroke="rgba(201,169,110,.28)" stroke-width=".7"/>
+          <!-- Tick marks every 30° -->
+          <g stroke="#c9a96e" stroke-width=".7" opacity=".4">
+            <line x1="110" y1="10"  x2="110" y2="22"/>
+            <line x1="110" y1="198" x2="110" y2="210"/>
+            <line x1="10"  y1="110" x2="22"  y2="110"/>
+            <line x1="198" y1="110" x2="210" y2="110"/>
+            <line x1="39"  cy1="39"  x2="48"  y2="48" x1="39" y1="39"/>
+            <line x1="172" y1="39"  x2="163" y2="48"/>
+            <line x1="39"  y1="181" x2="48"  y2="172"/>
+            <line x1="172" y1="181" x2="163" y2="172"/>
+          </g>
+          <!-- Cardinal labels -->
+          <text x="110" y="8"   text-anchor="middle" font-size="11" fill="#c9a96e" font-family="serif" opacity=".75">N</text>
+          <text x="110" y="218" text-anchor="middle" font-size="11" fill="#c9a96e" font-family="serif" opacity=".45">S</text>
+          <text x="5"   y="114" text-anchor="middle" font-size="11" fill="#c9a96e" font-family="serif" opacity=".45">W</text>
+          <text x="215" y="114" text-anchor="middle" font-size="11" fill="#c9a96e" font-family="serif" opacity=".45">E</text>
+          <!-- Qibla needle: 58° from North (NE) -->
+          <g transform="translate(110,110) rotate(58)">
+            <polygon points="0,-84 5,-16 0,-26 -5,-16" fill="#c9a96e" opacity=".92"/>
+            <polygon points="0,84  4,16  0,24  -4,16"  fill="rgba(201,169,110,.28)"/>
+            <circle r="10" fill="#090e09" stroke="#c9a96e" stroke-width="1.8"/>
+            <circle r="4"  fill="#c9a96e" opacity=".85"/>
+          </g>
+          <!-- Kaaba icon at needle tip -->
+          <g transform="translate(110,110) rotate(58) translate(0,-92)">
+            <rect x="-9" y="-8" width="18" height="14" fill="#0d1e10" stroke="#c9a96e" stroke-width="1.2" rx="1"/>
+            <rect x="-9" y="-4" width="18" height="5" fill="#c9a96e" opacity=".72"/>
+          </g>
+          <!-- Labels -->
+          <text x="110" y="126" text-anchor="middle" font-size="10" fill="rgba(201,169,110,.75)" font-family="serif" letter-spacing="1.5">QIBLA</text>
+          <text x="110" y="140" text-anchor="middle" font-size="8.5" fill="rgba(201,169,110,.45)" font-family="serif">58° NE &middot; Maryland to Mecca</text>
+        </svg>
+        <div class="mosaic-cap">Qibla bearing &mdash; 58° northeast from Maryland</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══ WALKTHROUGH ══ -->
+<div class="page-section" style="background:#fff">
+  <div class="inner">
+    <div class="reveal"><span class="label">Room by Room</span><h2 class="heading">A Walk Through the Prayer Space</h2></div>
+
+    <!-- Step 01 — Entry: Kaaba front view -->
+    <div class="wt-step reveal">
+      <div class="wt-num">01</div>
+      <div class="wt-text">
+        <h3>Entry &amp; Shoe Storage</h3>
+        <p>A small vestibule at the entrance keeps outdoor shoes separate, maintaining the purity of the prayer space. A built-in bench with shoe storage below makes this transition easy for seniors.</p>
+      </div>
+      <div class="wt-art" style="background:#060d0d; overflow:hidden;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Kaaba_Mirror_ed._edit.jpg/640px-Kaaba_Mirror_ed._edit.jpg"
+             alt="The Holy Kaaba at Masjid al-Haram, Mecca"
+             style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease"/>
+      </div>
+    </div>
+
+    <!-- Step 02 — Wudu: Tawaf aerial -->
+    <div class="wt-step reveal">
+      <div class="wt-num">02</div>
+      <div class="wt-text">
+        <h3>The Wudu Station</h3>
+        <p>An accessible low basin with lever-style taps, a grab rail, non-slip matting, and a fold-down seat. The wudu area is directly adjacent to the prayer room &#8212; you never walk far with wet feet.</p>
+      </div>
+      <div class="wt-art" style="background:#060d0d; overflow:hidden;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Kaaba%2C_Never_still.jpg/640px-Kaaba%2C_Never_still.jpg"
+             alt="Pilgrims performing Tawaf around the Holy Kaaba"
+             style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease"/>
+      </div>
+    </div>
+
+    <!-- Step 03 — Mihrab: arch illustration -->
+    <div class="wt-step reveal">
+      <div class="wt-num">03</div>
+      <div class="wt-text">
+        <h3>The Mihrab Wall</h3>
+        <p>A subtly recessed alcove in the qibla wall serves as the mihrab &#8212; a visual focal point and tactile marker of direction. Finished in textured plaster with a gentle arch, referencing Islamic tradition without excess.</p>
+      </div>
+      <div class="wt-art" style="background:#0d0a06; overflow:hidden;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Mihrab_Sultan_Hassan_Mosque.jpg/480px-Mihrab_Sultan_Hassan_Mosque.jpg"
+             alt="Mihrab of the Sultan Hassan Mosque, Cairo — a recessed prayer niche marking the qibla direction"
+             style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;transition:transform .5s ease"/>
+      </div>
+    </div>
+
+    <!-- Step 04 — Quran shelf: Kaaba+crescent night sky -->
+    <div class="wt-step reveal">
+      <div class="wt-num">04</div>
+      <div class="wt-text">
+        <h3>Quran Shelf &amp; Storage</h3>
+        <p>A fitted alcove beside the mihrab stores rolled prayer rugs at accessible height, alongside a dedicated shelf for the Quran, tasbih, and prayer books &#8212; always at hand, never misplaced.</p>
+      </div>
+      <div class="wt-art" style="background:#060d0d; overflow:hidden;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Mecca_Kaaba.JPG/640px-Mecca_Kaaba.JPG"
+             alt="Close-up of the Holy Kaaba and the Kiswa embroidered cloth"
+             style="width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease"/>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ ARABIC BAND ══ -->
+<div class="arabic-band">
+  <div class="arabic-display">&#x0641;&#x064E;&#x0623;&#x064E;&#x064A;&#x0652;&#x0646;&#x064E;&#x0645;&#x064E;&#x0627; &#x062A;&#x064F;&#x0648;&#x064E;&#x0644;&#x064F;&#x0651;&#x0648;&#x0627; &#x0641;&#x064E;&#x062B;&#x064E;&#x0645;&#x064E;&#x0651; &#x0648;&#x064E;&#x062C;&#x0652;&#x0647;&#x064F; &#x0627;&#x0644;&#x0644;&#x0651;&#x064E;&#x0647;&#x0650;</div>
+  <div class="arabic-trans">&#8220;Wherever you turn, there is the Face of Allah.&#8221;</div>
+  <div class="arabic-src">Qur&#x02BC;an 2:115</div>
+</div>
+
+<!-- ══ SPECS ══ -->
+<div class="page-section" style="background:var(--cream)">
+  <div class="inner">
+    <div class="reveal"><span class="label">Room Specifications</span><h2 class="heading">Every Detail, Considered</h2></div>
+    <div class="specs-row">
+      <div class="spec-cell reveal"><div class="icon">&#x1F9ED;</div><h4>Precise Qibla</h4><p>Calibrated to the exact bearing from Maryland to Mecca (approx. 58&#xB0; NE)</p></div>
+      <div class="spec-cell reveal"><div class="icon">&#x1F4CF;</div><h4>Prayer Rug Sized</h4><p>Room comfortably fits 2 adults praying side by side</p></div>
+      <div class="spec-cell reveal"><div class="icon">&#x1F9F9;</div><h4>Easy-Clean Floors</h4><p>Warm-toned porcelain tile &#8212; hygienic and beautiful underfoot</p></div>
+      <div class="spec-cell reveal"><div class="icon">&#x1F50A;</div><h4>Acoustic Privacy</h4><p>Insulated walls keep adhan and recitation within the prayer room</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ CTA ══ -->
+<div class="page-section" style="background:#fff">
+  <div class="cta-block reveal">
+    <span class="label">Join Our Community</span>
+    <h2 class="heading">A Home Built Around Your Faith</h2>
+    <div class="rule" style="margin:18px auto"></div>
+    <p class="body-text" style="text-align:center;margin:0 auto">Dar Al-Sakina is accepting founding resident interest. We&#x2019;d love to tell you more.</p>
+    <div class="cta-btns">
+      <a href="index.html#interest" class="btn btn-gold">Express Interest</a>
+      <a href="payment.html"        class="btn btn-outline-teal">Support This Vision</a>
+      <a href="index.html"          class="btn btn-outline-teal">Back to Home</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">Dar Al-<span>Sakina</span></div>
+  <div class="footer-tagline">A House of Tranquility &#xB7; Maryland</div>
+  <ul class="footer-nav">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="single-family-homes.html">Homes</a></li>
+    <li><a href="private-gardens.html">Gardens</a></li>
+    <li><a href="qibla-oriented-design.html">Prayer Rooms</a></li>
+    <li><a href="accessible-living.html">Accessibility</a></li>
+    <li><a href="index.html#amenities">Amenities</a></li>
+    <li><a href="payment.html">Payment</a></li>
+    <li><a href="index.html#interest">Contact</a></li>
+  </ul>
+  <div class="footer-copy">&#169; 2025 Dar Al-Sakina. All rights reserved. &#xB7; Maryland, USA</div>
+</footer>
+
+<script>
+  var navbar=document.getElementById('navbar');
+  window.addEventListener('scroll',function(){navbar.classList.toggle('scrolled',window.scrollY>60);});
+  var observer=new IntersectionObserver(function(entries){entries.forEach(function(e,i){if(e.isIntersecting){setTimeout(function(){e.target.classList.add('visible');},i*70);observer.unobserve(e.target);}});},{threshold:0.1});
+  document.querySelectorAll('.reveal').forEach(function(el){observer.observe(el);});
+</script>
+</body>
+</html>

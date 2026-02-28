@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Dar Al-Sakina | A Muslim Retirement Community in Maryland</title>
+<meta name="description" content="A boutique Muslim retirement community in Maryland — 20 homes, one courtyard, a lifetime of belonging."/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="site.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/emailjs-com/3.2.0/email.min.js"></script>
+<style>
+/* ── INDEX-SPECIFIC STYLES ── */
+
+/* HERO */
+#hero { height: 100vh; position: relative; display: flex; align-items: center; justify-content: center; text-align: center; overflow: hidden; }
+.hero-bg { position: absolute; inset: 0; background: linear-gradient(160deg, #1e4a4a 0%, #2d6a6a 42%, #3d5a3e 100%); }
+.geo-overlay {
+  position: absolute; inset: 0; opacity: .07;
+  background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23c9a96e' stroke-width='1'%3E%3Cpolygon points='40,5 75,25 75,55 40,75 5,55 5,25'/%3E%3Cpolygon points='40,15 65,28 65,52 40,65 15,52 15,28'/%3E%3Cline x1='40' y1='5' x2='40' y2='15'/%3E%3Cline x1='75' y1='25' x2='65' y2='28'/%3E%3Cline x1='75' y1='55' x2='65' y2='52'/%3E%3Cline x1='40' y1='75' x2='40' y2='65'/%3E%3Cline x1='5' y1='55' x2='15' y2='52'/%3E%3Cline x1='5' y1='25' x2='15' y2='28'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 80px 80px;
+}
+.hero-inner { position: relative; z-index: 2; max-width: 780px; padding: 0 24px; }
+.arabic-tag { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; color: var(--gold); letter-spacing: .3em; text-transform: uppercase; margin-bottom: 18px; opacity: 0; animation: fadeUp .8s .3s forwards; }
+.hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 300; color: #fff; line-height: 1.1; margin-bottom: 24px; opacity: 0; animation: fadeUp .8s .5s forwards; }
+.hero-title em { color: var(--gold); font-style: normal; }
+.hero-sub { font-size: 1.05rem; color: rgba(255,255,255,.75); line-height: 1.85; max-width: 560px; margin: 0 auto 40px; opacity: 0; animation: fadeUp .8s .7s forwards; }
+.hero-btns { opacity: 0; animation: fadeUp .8s .9s forwards; display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+.scroll-hint { position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; color: rgba(255,255,255,.45); font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; }
+.scroll-line { width: 1px; height: 48px; background: linear-gradient(to bottom, rgba(255,255,255,.4), transparent); animation: scrollPulse 2s infinite; }
+
+/* SECTIONS */
+section { padding: 110px 64px; }
+.section-tag { font-size: .78rem; letter-spacing: .25em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+.section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 4vw, 3.2rem); font-weight: 400; line-height: 1.2; color: var(--teal-dark); margin-bottom: 20px; }
+.section-body { font-size: 1rem; line-height: 1.9; color: var(--text-light); max-width: 600px; }
+.divider { width: 60px; height: 2px; background: var(--gold); margin: 24px 0; }
+
+/* ABOUT */
+#about { background: #fff; }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; max-width: 1200px; margin: 0 auto; }
+.about-card { background: var(--teal); border-radius: 4px; padding: 50px 40px; color: #fff; position: relative; overflow: hidden; }
+.about-card::before { content: ''; position: absolute; top: -30px; right: -30px; width: 120px; height: 120px; border: 2px solid rgba(201,169,110,.3); border-radius: 50%; }
+.about-card::after  { content: ''; position: absolute; bottom: -20px; left: -20px; width: 80px; height: 80px; border: 2px solid rgba(201,169,110,.2); border-radius: 50%; }
+.about-card blockquote { font-family: 'Cormorant Garamond', serif; font-size: 1.55rem; font-weight: 300; line-height: 1.5; margin-bottom: 16px; }
+.about-card cite { font-size: .8rem; color: var(--gold-light); letter-spacing: .1em; }
+.about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--gold-light); margin-top: 24px; }
+.stat { background: var(--teal-dark); padding: 24px 20px; text-align: center; }
+.stat-num { font-family: 'Cormorant Garamond', serif; font-size: 2.4rem; color: var(--gold); font-weight: 500; }
+.stat-label { font-size: .72rem; color: rgba(255,255,255,.55); letter-spacing: .09em; margin-top: 4px; }
+
+/* COMMUNITY */
+#community { background: var(--cream); }
+.community-inner { max-width: 1200px; margin: 0 auto; }
+.community-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 56px; gap: 32px; }
+.homes-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.home-card {
+  background: #fff; border-radius: 4px; overflow: hidden;
+  transition: transform .3s, box-shadow .3s;
+  text-decoration: none; color: inherit; display: block;
+}
+.home-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,.1); }
+.home-icon { background: linear-gradient(135deg, var(--teal), var(--sage)); height: 140px; display: flex; align-items: center; justify-content: center; font-size: 2.8rem; }
+.home-info { padding: 22px; }
+.home-info h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--teal-dark); margin-bottom: 8px; }
+.home-info p { font-size: .84rem; color: var(--text-light); line-height: 1.7; margin-bottom: 14px; }
+.home-link { font-size: .74rem; color: var(--gold); letter-spacing: .1em; text-transform: uppercase; font-weight: 500; }
+
+/* COURTYARD */
+.courtyard-section { margin-top: 80px; background: linear-gradient(135deg, var(--teal-dark), var(--teal)); border-radius: 6px; padding: 70px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+.courtyard-visual { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; padding: 20px; background: rgba(255,255,255,.05); border-radius: 4px; }
+.c-home { background: rgba(255,255,255,.15); border-radius: 3px; height: 42px; display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: background .2s; }
+.c-home:hover { background: rgba(201,169,110,.4); }
+.c-center { grid-column: 2/5; grid-row: 2/4; background: rgba(201,169,110,.2); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 2rem; border: 1px solid rgba(201,169,110,.3); }
+.courtyard-text { color: #fff; }
+.courtyard-text .section-tag { color: var(--gold-light); }
+.courtyard-text .section-title { color: #fff; font-size: 2rem; }
+.courtyard-text .section-body { color: rgba(255,255,255,.75); }
+
+/* AMENITIES */
+#amenities { background: #fff; }
+.amenities-inner { max-width: 1200px; margin: 0 auto; }
+.amenities-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 50px; }
+.amenity-card { padding: 40px 32px; border: 1px solid #ece8e0; border-radius: 4px; transition: all .3s; position: relative; overflow: hidden; }
+.amenity-card::before { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--gold), var(--teal)); transform: scaleX(0); transition: transform .3s; transform-origin: left; }
+.amenity-card:hover { box-shadow: 0 12px 36px rgba(0,0,0,.08); border-color: transparent; }
+.amenity-card:hover::before { transform: scaleX(1); }
+.amenity-icon { font-size: 2.2rem; margin-bottom: 20px; }
+.amenity-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; color: var(--teal-dark); margin-bottom: 12px; }
+.amenity-card p { font-size: .87rem; line-height: 1.8; color: var(--text-light); }
+
+/* DAILY LIFE */
+#life { background: var(--cream); }
+.life-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.schedule-item { display: flex; align-items: flex-start; gap: 20px; padding: 20px 0; border-bottom: 1px solid #ece8e0; }
+.schedule-item:last-child { border-bottom: none; }
+.sched-time { font-size: .76rem; color: var(--gold); letter-spacing: .12em; text-transform: uppercase; min-width: 80px; padding-top: 3px; }
+.sched-content h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--teal-dark); margin-bottom: 4px; }
+.sched-content p { font-size: .82rem; color: var(--text-light); line-height: 1.65; }
+.life-visual { background: linear-gradient(160deg, var(--sage), var(--teal)); border-radius: 6px; padding: 60px; color: #fff; text-align: center; }
+.life-visual .big-num { font-family: 'Cormorant Garamond', serif; font-size: 6rem; color: rgba(255,255,255,.12); font-weight: 300; line-height: 1; }
+.life-pillars { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 32px; }
+.pillar { background: rgba(255,255,255,.1); border-radius: 4px; padding: 22px; text-align: left; backdrop-filter: blur(4px); }
+.pillar h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; margin-bottom: 7px; }
+.pillar p { font-size: .78rem; opacity: .78; line-height: 1.6; }
+
+/* LOCATION */
+#location { background: var(--teal-dark); color: #fff; text-align: center; }
+#location .section-title { color: #fff; }
+#location .section-body { color: rgba(255,255,255,.7); margin: 0 auto; }
+.location-badges { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-top: 48px; }
+.badge { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15); border-radius: 40px; padding: 11px 24px; font-size: .84rem; color: rgba(255,255,255,.8); display: flex; align-items: center; gap: 10px; }
+
+/* INTEREST FORM */
+#interest { background: #fff; }
+.form-inner { max-width: 700px; margin: 0 auto; text-align: center; }
+.form-inner .section-body { margin: 0 auto 48px; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; text-align: left; margin-bottom: 18px; }
+.form-group { display: flex; flex-direction: column; gap: 7px; }
+.form-group label { font-size: .76rem; letter-spacing: .1em; text-transform: uppercase; color: var(--text-light); }
+.form-group input, .form-group select, .form-group textarea {
+  padding: 13px 15px; border: 1px solid #e0dbd2; border-radius: 3px;
+  font-family: 'Inter', sans-serif; font-size: .9rem;
+  background: var(--cream); color: var(--text);
+  transition: border-color .3s; outline: none;
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--teal); }
+.form-full { grid-column: 1 / -1; }
+.form-note { font-size: .78rem; color: var(--text-light); margin-top: 14px; }
+.success-msg { display: none; background: #e8f4f0; border: 1px solid var(--sage); border-radius: 4px; padding: 18px; color: var(--teal-dark); margin-top: 18px; font-size: .9rem; }
+.error-msg   { display: none; background: #fdecea; border: 1px solid #e57373; border-radius: 4px; padding: 18px; color: #b71c1c; margin-top: 18px; font-size: .9rem; }
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  section { padding: 80px 32px; }
+  .about-grid, .life-inner { grid-template-columns: 1fr; gap: 44px; }
+  .homes-grid { grid-template-columns: 1fr 1fr; }
+  .amenities-grid { grid-template-columns: 1fr 1fr; }
+  .courtyard-section { grid-template-columns: 1fr; padding: 44px 32px; }
+  .community-header { flex-direction: column; align-items: flex-start; }
+  .form-grid { grid-template-columns: 1fr; }
+  .life-pillars { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  section { padding: 64px 20px; }
+  .homes-grid { grid-template-columns: 1fr; }
+  .amenities-grid { grid-template-columns: 1fr; }
+  .location-badges { flex-direction: column; align-items: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">Dar Al-<span>Sakina</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+
+    <li class="nav-item has-dropdown">
+      <a href="#community">Community</a>
+      <div class="dropdown">
+        <div class="dd-header">
+          <strong>Our Homes</strong>
+          <small>20 thoughtfully designed residences</small>
+        </div>
+        <div class="dd-list">
+          <a href="single-family-homes.html" class="dd-item">
+            <div class="dd-thumb"><img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=180&q=80&fit=crop" alt="Single-Family Homes" loading="lazy"/></div>
+            <div class="dd-body">
+              <div class="dd-title">&#x1F3E1; Single-Family Homes</div>
+              <div class="dd-desc">Private, accessible homes with wide doorways, step-free entries, and serene interiors.</div>
+            </div>
+          </a>
+          <div class="dd-sep"></div>
+          <a href="private-gardens.html" class="dd-item">
+            <div class="dd-thumb"><img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=180&q=80&fit=crop" alt="Private Gardens" loading="lazy"/></div>
+            <div class="dd-body">
+              <div class="dd-title">&#x1F33F; Private Gardens</div>
+              <div class="dd-desc">A personal garden with every home &#8212; for morning dhikr and quiet outdoor reflection.</div>
+            </div>
+          </a>
+          <div class="dd-sep"></div>
+          <a href="qibla-oriented-design.html" class="dd-item">
+            <div class="dd-thumb"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Kaaba_Mirror_ed._edit.jpg/180px-Kaaba_Mirror_ed._edit.jpg" alt="Qibla-Oriented Design" loading="lazy"/></div>
+            <div class="dd-body">
+              <div class="dd-title">&#x1F54C; Qibla-Oriented Design</div>
+              <div class="dd-desc">Prayer rooms aligned to the qibla, with a wudu station and dedicated space for salah.</div>
+            </div>
+          </a>
+          <div class="dd-sep"></div>
+          <a href="accessible-living.html" class="dd-item">
+            <div class="dd-thumb"><img src="https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?w=180&q=80&fit=crop" alt="Accessible Living" loading="lazy"/></div>
+            <div class="dd-body">
+              <div class="dd-title">&#x267F; Accessible Living</div>
+              <div class="dd-desc">Grab bars, curbless showers, and wide hallways &#8212; comfort and dignity by design.</div>
+            </div>
+          </a>
+        </div>
+        <div class="dd-footer">
+          <small>Boutique community &#xB7; Maryland</small>
+          <a href="#community">View all &#8594;</a>
+        </div>
+      </div>
+    </li>
+
+    <li><a href="#amenities">Amenities</a></li>
+    <li><a href="#life">Daily Life</a></li>
+    <li><a href="payment.html">Payment</a></li>
+    <li><a href="#interest">Express Interest</a></li>
+  </ul>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="geo-overlay"></div>
+  <div class="hero-inner">
+    <p class="arabic-tag">&#x062F;&#x0627;&#x0631; &#x0627;&#x0644;&#x0633;&#x0643;&#x064A;&#x0646;&#x0629; &nbsp;&#xB7;&nbsp; Maryland</p>
+    <h1 class="hero-title">A Home Where <em>Peace</em> Finds You</h1>
+    <p class="hero-sub">A boutique Muslim retirement community nestled in Maryland &#8212; 20 thoughtfully designed homes gathered around a shared courtyard, built for connection, dignity, and a life rooted in faith.</p>
+    <div class="hero-btns">
+      <a href="#interest" class="btn btn-gold">Express Interest</a>
+      <a href="#about"    class="btn btn-outline">Learn More</a>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    Discover
+  </div>
+</section>
+
+<!-- ══ ABOUT ══ -->
+<section id="about">
+  <div class="about-grid">
+    <div class="reveal">
+      <div class="section-tag">Our Mission</div>
+      <h2 class="section-title">Built on the Foundations of Ummah</h2>
+      <div class="divider"></div>
+      <p class="section-body">Dar Al-Sakina was born from a simple truth: our elders deserve more than comfort &#8212; they deserve belonging. We have created a place where neighbors become family, where the call to prayer echoes through shared courtyards, and where each day is shaped by the rhythms of faith, rest, and togetherness.</p>
+      <br>
+      <p class="section-body">Located in Maryland, our community is designed for Muslim seniors who seek a peaceful, spiritually enriching environment surrounded by people who share their values and traditions.</p>
+    </div>
+    <div class="reveal">
+      <div class="about-card">
+        <blockquote>&#8220;The believers in their mutual kindness, compassion, and sympathy are just like one body.&#8221;</blockquote>
+        <cite>&#8212; Prophet Muhammad &#xFDFA; (Sahih al-Bukhari)</cite>
+        <div class="about-stats">
+          <div class="stat"><div class="stat-num">20</div><div class="stat-label">Homes</div></div>
+          <div class="stat"><div class="stat-num">1</div><div class="stat-label">Ummah</div></div>
+          <div class="stat"><div class="stat-num">&#x221E;</div><div class="stat-label">Community</div></div>
+          <div class="stat"><div class="stat-num">MD</div><div class="stat-label">Maryland</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ COMMUNITY ══ -->
+<section id="community">
+  <div class="community-inner">
+    <div class="community-header reveal">
+      <div>
+        <div class="section-tag">The Homes</div>
+        <h2 class="section-title">Intimate. Dignified. Yours.</h2>
+      </div>
+      <p style="max-width:360px;color:var(--text-light);font-size:.9rem;line-height:1.8">Each of our 20 single-family homes balances private living with easy access to the warmth of community &#8212; just steps from your door.</p>
+    </div>
+
+    <div class="homes-grid">
+      <a href="single-family-homes.html" class="home-card reveal">
+        <div class="home-icon">&#x1F3E1;</div>
+        <div class="home-info">
+          <h4>Single-Family Homes</h4>
+          <p>Wide doorways, step-free entries, and serene interiors designed for senior living.</p>
+          <span class="home-link">Explore &#8594;</span>
+        </div>
+      </a>
+      <a href="private-gardens.html" class="home-card reveal">
+        <div class="home-icon">&#x1F33F;</div>
+        <div class="home-info">
+          <h4>Private Gardens</h4>
+          <p>A personal garden with every home &#8212; a quiet place for dhikr and fresh air.</p>
+          <span class="home-link">Explore &#8594;</span>
+        </div>
+      </a>
+      <a href="qibla-oriented-design.html" class="home-card reveal">
+        <div class="home-icon">&#x1F54C;</div>
+        <div class="home-info">
+          <h4>Qibla-Oriented Design</h4>
+          <p>Prayer rooms precisely oriented to Mecca, with a dedicated wudu area.</p>
+          <span class="home-link">Explore &#8594;</span>
+        </div>
+      </a>
+      <a href="accessible-living.html" class="home-card reveal">
+        <div class="home-icon">&#x267F;</div>
+        <div class="home-info">
+          <h4>Accessible Living</h4>
+          <p>Grab bars, curbless showers, and wide hallways &#8212; comfort at every stage of life.</p>
+          <span class="home-link">Explore &#8594;</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="courtyard-section reveal">
+      <div class="courtyard-text">
+        <div class="section-tag">The Heart of Our Community</div>
+        <h2 class="section-title">The Shared Courtyard</h2>
+        <div class="divider"></div>
+        <p class="section-body">At the center of Dar Al-Sakina lies a lush, landscaped courtyard &#8212; the living room of our community. Homes are arranged around it so every neighbor is close, every gathering is easy, and no one is ever truly alone.</p>
+        <br>
+        <p class="section-body" style="font-size:.88rem">The courtyard features shaded seating, a fountain, walking paths, fruit trees, and a central pavilion for Eid celebrations.</p>
+      </div>
+      <div>
+        <div class="courtyard-visual">
+          <div class="c-home">&#x1F3E0;</div><div class="c-home">&#x1F3E0;</div><div class="c-home">&#x1F3E0;</div><div class="c-home">&#x1F3E0;</div><div class="c-home">&#x1F3E0;</div>
+          <div class="c-home">&#x1F3E0;</div>
+          <div class="c-center">&#x1F333;</div>
+          <div class="c-home">&#x1F3E0;</div>
+          <div class="c-home">&#x1F3E0;</div><div class="c-home">&#x1F3E0;</div><div class="c-home">&#x1F3E0;</div><div class="c-home">&#x1F3E0;</div><div class="c-home">&#x1F3E0;</div>
+          <div class="c-home">&#x1F3E0;</div><div class="c-home">&#x1F3E0;</div><div class="c-home">&#x1F3E0;</div><div class="c-home">&#x1F3E0;</div><div class="c-home">&#x1F3E0;</div>
+        </div>
+        <p style="color:rgba(255,255,255,.45);font-size:.73rem;text-align:center;margin-top:14px;letter-spacing:.07em">Illustrative layout &#xB7; 20 homes</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ AMENITIES ══ -->
+<section id="amenities">
+  <div class="amenities-inner">
+    <div class="reveal">
+      <div class="section-tag">Shared Spaces</div>
+      <h2 class="section-title">Everything a Fulfilling Life Needs</h2>
+    </div>
+    <div class="amenities-grid">
+      <div class="amenity-card reveal">
+        <div class="amenity-icon">&#x1F54C;</div>
+        <h3>Community Prayer Hall</h3>
+        <p>A dedicated musalla for the five daily prayers and Jumu&#x02BC;ah, with separate spaces for men and women and weekly Quran study circles.</p>
+      </div>
+      <div class="amenity-card reveal">
+        <div class="amenity-icon">&#x1F37D;&#xFE0F;</div>
+        <h3>Halal Community Kitchen</h3>
+        <p>A fully halal shared kitchen and dining area where residents cook together, share meals, and keep cultural food traditions alive.</p>
+      </div>
+      <div class="amenity-card reveal">
+        <div class="amenity-icon">&#x1F33A;</div>
+        <h3>Courtyard Garden</h3>
+        <p>A landscaped central courtyard with a fountain, shaded seating, a community vegetable garden, and winding walking paths.</p>
+      </div>
+      <div class="amenity-card reveal">
+        <div class="amenity-icon">&#x1F4DA;</div>
+        <h3>Islamic Library &amp; Reading Room</h3>
+        <p>A quiet space stocked with books on Islamic scholarship, Arabic language, history, and leisure reading for reflective afternoons.</p>
+      </div>
+      <div class="amenity-card reveal">
+        <div class="amenity-icon">&#x1FA7A;</div>
+        <h3>Wellness &amp; Care Center</h3>
+        <p>On-site wellness support including regular health screenings, visiting physicians, and care coordination for residents&#x2019; needs.</p>
+      </div>
+      <div class="amenity-card reveal">
+        <div class="amenity-icon">&#x1F3A8;</div>
+        <h3>Arts &amp; Activities Pavilion</h3>
+        <p>A bright pavilion for calligraphy classes, Eid celebrations, community gatherings, and creative workshops year-round.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ DAILY LIFE ══ -->
+<section id="life">
+  <div class="life-inner">
+    <div class="reveal">
+      <div class="section-tag">Daily Life</div>
+      <h2 class="section-title">Days Shaped by Faith &amp; Fellowship</h2>
+      <div class="divider"></div>
+      <p class="section-body">Life at Dar Al-Sakina flows naturally with the rhythms of Islamic practice &#8212; grounded in prayer, enriched by community, and unhurried by design.</p>
+      <div style="margin-top:32px">
+        <div class="schedule-item">
+          <div class="sched-time">Fajr</div>
+          <div class="sched-content"><h4>Morning Prayer &amp; Qur&#x02BC;an</h4><p>Community gathers in the musalla, followed by quiet recitation in the courtyard.</p></div>
+        </div>
+        <div class="schedule-item">
+          <div class="sched-time">Morning</div>
+          <div class="sched-content"><h4>Garden Walks &amp; Breakfast</h4><p>A gentle walk, shared breakfasts, and morning conversation with neighbors.</p></div>
+        </div>
+        <div class="schedule-item">
+          <div class="sched-time">Midday</div>
+          <div class="sched-content"><h4>Jumu&#x02BC;ah &amp; Community Lunch</h4><p>Friday prayers and a communal midday meal bring everyone together.</p></div>
+        </div>
+        <div class="schedule-item">
+          <div class="sched-time">Afternoon</div>
+          <div class="sched-content"><h4>Classes, Arts &amp; Rest</h4><p>Arabic lessons, calligraphy, storytelling circles, or peaceful rest in the courtyard.</p></div>
+        </div>
+        <div class="schedule-item">
+          <div class="sched-time">Evening</div>
+          <div class="sched-content"><h4>Maghrib &amp; Dinner Together</h4><p>Evening prayer followed by shared dinners &#8212; the warmest hour of every day.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="life-visual">
+        <div class="big-num">&#x662;&#x660;</div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.75rem;margin-bottom:10px">Four Pillars of Life Here</h3>
+        <p style="font-size:.83rem;opacity:.72;margin-bottom:28px">Everything we do flows from these foundations</p>
+        <div class="life-pillars">
+          <div class="pillar"><h4>&#x1F932; Faith</h4><p>Prayer, Qur&#x02BC;an, and Islamic learning woven into every day.</p></div>
+          <div class="pillar"><h4>&#x1F91D; Community</h4><p>Neighbors who become family, sharing meals and milestones.</p></div>
+          <div class="pillar"><h4>&#x1F33F; Serenity</h4><p>A calm, unhurried environment designed for peace of mind.</p></div>
+          <div class="pillar"><h4>&#x1F49B; Dignity</h4><p>Honoring our elders with the care and respect they deserve.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ LOCATION ══ -->
+<section id="location">
+  <div class="reveal" style="max-width:800px;margin:0 auto">
+    <div class="section-tag" style="color:var(--gold-light)">Where We Are</div>
+    <h2 class="section-title">Rooted in Maryland</h2>
+    <div class="divider" style="margin:22px auto"></div>
+    <p class="section-body">Dar Al-Sakina is located in the greater Maryland area, close to a vibrant Muslim community, halal grocers, Islamic schools, and major medical centers &#8212; so residents stay connected to everything that matters.</p>
+    <div class="location-badges">
+      <div class="badge"><span>&#x1F54C;</span> Near local mosques</div>
+      <div class="badge"><span>&#x1F3E5;</span> Close to medical centers</div>
+      <div class="badge"><span>&#x1F6D2;</span> Halal grocery access</div>
+      <div class="badge"><span>&#x1F333;</span> Peaceful suburban setting</div>
+      <div class="badge"><span>&#x2708;&#xFE0F;</span> Near BWI Airport</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ INTEREST FORM ══ -->
+<section id="interest">
+  <div class="form-inner reveal">
+    <div class="section-tag">Get in Touch</div>
+    <h2 class="section-title">Express Your Interest</h2>
+    <div class="divider" style="margin:20px auto"></div>
+    <p class="section-body">We are currently in the planning phase and building our founding community list. Fill out the form and we will be in touch with updates, virtual tours, and more.</p>
+
+    <form id="interestForm" novalidate style="margin-top:40px">
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="first_name">First Name</label>
+          <input id="first_name" name="first_name" type="text" placeholder="Fatima" required/>
+        </div>
+        <div class="form-group">
+          <label for="last_name">Last Name</label>
+          <input id="last_name" name="last_name" type="text" placeholder="Al-Hassan" required/>
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input id="email" name="email" type="email" placeholder="you@example.com" required/>
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input id="phone" name="phone" type="tel" placeholder="(301) 000-0000"/>
+        </div>
+        <div class="form-group">
+          <label for="interested_for">Interested For</label>
+          <select id="interested_for" name="interested_for">
+            <option>Myself</option>
+            <option>A Parent or Loved One</option>
+            <option>Both</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="timeline">Estimated Timeline</label>
+          <select id="timeline" name="timeline">
+            <option>Within 1 year</option>
+            <option>1&#8211;3 years</option>
+            <option>3+ years / Just exploring</option>
+          </select>
+        </div>
+        <div class="form-group form-full">
+          <label for="message">Message (optional)</label>
+          <textarea id="message" name="message" rows="4" placeholder="Tell us a little about yourself or any questions you have&#8230;"></textarea>
+        </div>
+      </div>
+      <button type="button" class="btn btn-gold" id="submitBtn" onclick="submitForm()" style="width:100%;padding:15px;font-size:.88rem">
+        Submit Interest &#8594;
+      </button>
+    </form>
+    <p class="form-note">We respect your privacy. Your information will never be shared with third parties.</p>
+    <div class="success-msg" id="successMsg">&#x2705; Jazakallahu Khayran! We have received your interest and will be in touch soon.</div>
+    <div class="error-msg"   id="errorMsg">&#x26A0;&#xFE0F; Something went wrong. Please try again or email us directly.</div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-logo">Dar Al-<span>Sakina</span></div>
+  <div class="footer-tagline">A House of Tranquility &#xB7; Maryland</div>
+  <ul class="footer-nav">
+    <li><a href="#about">About</a></li>
+    <li><a href="single-family-homes.html">Homes</a></li>
+    <li><a href="private-gardens.html">Gardens</a></li>
+    <li><a href="qibla-oriented-design.html">Prayer Rooms</a></li>
+    <li><a href="accessible-living.html">Accessibility</a></li>
+    <li><a href="#amenities">Amenities</a></li>
+    <li><a href="#interest">Contact</a></li>
+  </ul>
+  <div class="footer-copy">&#169; 2025 Dar Al-Sakina. All rights reserved. &#xB7; Maryland, USA</div>
+</footer>
+
+<script>
+  var EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';
+  var EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';
+  var EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
+  var CONTACT_EMAIL = ['jmlrazzak', 'yahoo.com'].join('@');
+  var emailjsReady = EMAILJS_PUBLIC_KEY !== 'YOUR_PUBLIC_KEY';
+  if (emailjsReady) { try { emailjs.init(EMAILJS_PUBLIC_KEY); } catch(e){} }
+
+  /* Navbar scroll */
+  var navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', function(){ navbar.classList.toggle('scrolled', window.scrollY > 60); });
+
+  /* Scroll reveal */
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(e, i){
+      if (e.isIntersecting){
+        setTimeout(function(){ e.target.classList.add('visible'); }, i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(function(el){ observer.observe(el); });
+
+  /* Form submit */
+  function submitForm(){
+    var btn = document.getElementById('submitBtn');
+    var ok  = document.getElementById('successMsg');
+    var err = document.getElementById('errorMsg');
+    var first = document.getElementById('first_name').value.trim();
+    var email = document.getElementById('email').value.trim();
+    if (!first || !email){ alert('Please fill in your first name and email.'); return; }
+    btn.disabled = true; btn.textContent = 'Sending\u2026';
+    ok.style.display = err.style.display = 'none';
+
+    if (emailjsReady){
+      emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, '#interestForm')
+        .then(function(){ ok.style.display='block'; document.getElementById('interestForm').reset(); },
+              function(){ err.style.display='block'; })
+        .finally ? emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, '#interestForm').finally(function(){ btn.disabled=false; btn.innerHTML='Submit Interest &#8594;'; }) : null;
+      btn.disabled=false; btn.innerHTML='Submit Interest &#8594;';
+    } else {
+      var last=document.getElementById('last_name').value.trim();
+      var phone=document.getElementById('phone').value.trim();
+      var ifor=document.getElementById('interested_for').value;
+      var tline=document.getElementById('timeline').value;
+      var msg=document.getElementById('message').value.trim();
+      var body='New Interest \u2013 Dar Al-Sakina\n\nName: '+first+' '+last+'\nEmail: '+email+'\nPhone: '+(phone||'n/a')+'\nFor: '+ifor+'\nTimeline: '+tline+'\nMessage: '+(msg||'n/a');
+      window.location.href='mailto:'+CONTACT_EMAIL+'?subject='+encodeURIComponent('Dar Al-Sakina Interest')+'&body='+encodeURIComponent(body);
+      ok.style.display='block';
+      btn.disabled=false; btn.innerHTML='Submit Interest &#8594;';
+    }
+  }
+</script>
+</body>
+</html>

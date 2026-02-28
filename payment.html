@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Payment &amp; Donations | Dar Al-Sakina</title>
+<meta name="description" content="Submit your monthly resident fee, make a one-time donation, or contribute sadaqah jariyah to help build Maryland's first Muslim retirement community."/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="site.css"/>
+<style>
+
+/* ══ HERO ══ */
+.hero-img-pay {
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Kaaba_Mirror_ed._edit.jpg/1600px-Kaaba_Mirror_ed._edit.jpg');
+  background-size: cover; background-position: center 45%;
+  background-color: #060d0d;
+}
+
+/* ══ WHY GIVE ══ */
+.give-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:28px; margin-top:52px; }
+.give-card { padding:36px 28px; border-left:3px solid var(--gold); background:#fff; border-radius:0 4px 4px 0; }
+.give-icon { font-size:2rem; margin-bottom:16px; }
+.give-card h3 { font-family:'Cormorant Garamond',serif; font-size:1.2rem; color:var(--teal-dark); margin-bottom:10px; }
+.give-card p { font-size:.82rem; color:var(--text-light); line-height:1.85; }
+
+/* ══ TAB NAV ══ */
+.pay-tabs { display:flex; border:1px solid #ddd8cf; border-radius:4px 4px 0 0; overflow:hidden; }
+.pay-tab {
+  flex:1; padding:18px 10px; cursor:pointer; background:#fff;
+  border:none; border-right:1px solid #ddd8cf;
+  font-family:'Inter',sans-serif; font-size:.75rem;
+  letter-spacing:.08em; text-transform:uppercase;
+  color:var(--text-light); transition:all .2s; text-align:center;
+}
+.pay-tab:last-child { border-right:none; }
+.pay-tab:hover { background:var(--cream); color:var(--teal); }
+.pay-tab.active { background:var(--teal-dark); color:#fff; font-weight:500; }
+.tab-icon { display:block; font-size:1.4rem; margin-bottom:5px; }
+.tab-sub { display:block; font-size:.64rem; opacity:.65; letter-spacing:.04em; text-transform:none; margin-top:2px; }
+
+/* ══ PANEL ══ */
+.pay-panel {
+  background:#fff; border:1px solid #ddd8cf;
+  border-top:none; border-radius:0 0 4px 4px;
+  padding:36px 40px;
+}
+
+/* ══ AMOUNT CARDS ══ */
+.amount-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-bottom:24px; }
+.amount-card {
+  border:1.5px solid #ddd8cf; border-radius:4px; padding:18px 10px;
+  text-align:center; cursor:pointer; transition:all .22s; background:#fff;
+}
+.amount-card:hover { border-color:var(--gold); background:var(--cream); }
+.amount-card.selected { border-color:var(--teal-dark); background:rgba(30,74,74,.06); }
+.amt { font-family:'Cormorant Garamond',serif; font-size:1.55rem; color:var(--teal-dark); font-weight:500; display:block; }
+.amt-label { font-size:.67rem; color:var(--text-light); letter-spacing:.05em; text-transform:uppercase; margin-top:3px; }
+
+/* ══ CUSTOM AMOUNT ══ */
+.custom-amount-row { display:flex; align-items:center; gap:12px; margin-bottom:24px; }
+.custom-prefix { font-family:'Cormorant Garamond',serif; font-size:1.8rem; color:var(--teal-dark); line-height:1; }
+.custom-amount-row input {
+  flex:1; font-size:1.3rem; border:none; border-bottom:2px solid var(--gold);
+  border-radius:0; padding:8px 4px; background:transparent;
+  color:var(--teal-dark); font-family:'Cormorant Garamond',serif; outline:none;
+}
+
+/* ══ PAYMENT METHODS ══ */
+.pay-methods { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:24px; }
+.pay-method {
+  display:flex; align-items:center; gap:10px; padding:12px 18px;
+  border:1.5px solid #ddd8cf; border-radius:3px; cursor:pointer;
+  font-size:.82rem; background:#fff; transition:all .2s;
+}
+.pay-method:hover { border-color:var(--teal); }
+.pay-method.selected { border-color:var(--teal-dark); background:rgba(30,74,74,.05); }
+.method-icon { font-size:1.2rem; }
+.method-name { font-weight:500; color:var(--text); display:block; }
+.method-sub { font-size:.68rem; color:var(--text-light); display:block; }
+
+/* ══ FORM FIELDS ══ */
+.field-row { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-bottom:18px; }
+.field-row.full { grid-template-columns:1fr; }
+.field-row.three { grid-template-columns:2fr 1fr 1fr; }
+.field-group { display:flex; flex-direction:column; gap:6px; }
+.field-group label { font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; color:var(--text-light); font-weight:500; }
+.field-group input, .field-group select {
+  padding:13px 16px; border:1.5px solid #ddd8cf; border-radius:3px;
+  font-family:'Inter',sans-serif; font-size:.88rem; color:var(--text);
+  background:#fff; transition:border-color .2s; outline:none; width:100%;
+  box-sizing:border-box;
+}
+.field-group input:focus, .field-group select:focus { border-color:var(--teal); }
+.field-group input::placeholder { color:#b0a89a; }
+.icon-wrap { position:relative; }
+.icon-wrap input { padding-left:44px; }
+.field-icon { position:absolute; left:14px; top:50%; transform:translateY(-50%); pointer-events:none; }
+
+/* ══ SECURE BADGE ══ */
+.secure-row { display:flex; align-items:center; gap:12px; padding:14px 18px; background:#f7f4ef; border-radius:3px; margin-bottom:24px; }
+.secure-row p { font-size:.76rem; color:var(--text-light); line-height:1.6; margin:0; }
+
+/* ══ SUBMIT ══ */
+.pay-submit {
+  width:100%; padding:18px; background:var(--teal-dark); color:#fff;
+  border:none; border-radius:3px; font-family:'Inter',sans-serif;
+  font-size:.88rem; letter-spacing:.12em; text-transform:uppercase;
+  font-weight:500; cursor:pointer; transition:all .25s; display:block;
+}
+.pay-submit:hover { background:var(--teal); transform:translateY(-2px); box-shadow:0 8px 24px rgba(30,74,74,.25); }
+.submit-note { font-size:.72rem; color:var(--text-light); margin-top:10px; text-align:center; }
+
+/* ══ IMPACT BAND ══ */
+.impact-band { background:var(--teal-dark); padding:80px; }
+.impact-band .inner { max-width:1160px; margin:0 auto; }
+.impact-nums { display:grid; grid-template-columns:repeat(4,1fr); gap:2px; background:rgba(255,255,255,.1); margin-top:48px; }
+.impact-num { background:var(--teal-dark); padding:40px 20px; text-align:center; }
+.i-num { font-family:'Cormorant Garamond',serif; font-size:3rem; color:var(--gold-light); font-weight:300; display:block; }
+.i-label { font-size:.74rem; color:rgba(255,255,255,.5); letter-spacing:.14em; text-transform:uppercase; margin-top:6px; display:block; }
+
+/* ══ BANK / CHECK ══ */
+.bank-info { background:#f7f4ef; border-radius:4px; padding:28px 32px; margin-bottom:24px; }
+.bank-info h4 { font-family:'Cormorant Garamond',serif; font-size:1.05rem; color:var(--teal-dark); margin-bottom:18px; }
+.bank-row { display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid #ede8df; font-size:.85rem; }
+.bank-row:last-child { border-bottom:none; }
+.b-label { color:var(--text-light); }
+.b-val { font-weight:500; color:var(--text); font-family:'Cormorant Garamond',serif; }
+.copy-btn { font-size:.67rem; background:var(--cream); border:1px solid #ddd8cf; padding:3px 8px; border-radius:2px; cursor:pointer; margin-left:8px; color:var(--text-light); transition:all .2s; }
+.copy-btn:hover { background:var(--gold); color:#fff; border-color:var(--gold); }
+.check-box { border:1px solid #ddd8cf; border-radius:4px; padding:28px 32px; }
+.check-box h4 { font-family:'Cormorant Garamond',serif; font-size:1.05rem; color:var(--teal-dark); margin-bottom:18px; }
+.check-step { display:flex; gap:16px; align-items:flex-start; margin-bottom:16px; }
+.step-num { width:28px; height:28px; border-radius:50%; background:var(--teal-dark); color:#fff; display:flex; align-items:center; justify-content:center; font-size:.72rem; font-weight:500; flex-shrink:0; }
+.check-step p { font-size:.83rem; color:var(--text-light); line-height:1.7; padding-top:3px; margin:0; }
+
+/* ══ FAQ ══ */
+.faq-item { border-bottom:1px solid #ddd8cf; padding:22px 0; }
+.faq-item:last-child { border-bottom:none; }
+.faq-item h4 { font-family:'Cormorant Garamond',serif; font-size:1.1rem; color:var(--teal-dark); margin-bottom:8px; }
+.faq-item p { font-size:.84rem; color:var(--text-light); line-height:1.8; }
+
+/* ══ RESPONSIVE ══ */
+@media (max-width:1024px) {
+  .give-grid { grid-template-columns:1fr 1fr; }
+  .impact-nums { grid-template-columns:1fr 1fr; }
+  .impact-band { padding:64px 32px; }
+  .pay-panel { padding:28px 24px; }
+}
+@media (max-width:768px) {
+  .pay-tabs { flex-direction:column; }
+  .pay-tab { border-right:none; border-bottom:1px solid #ddd8cf; }
+  .pay-tab:last-child { border-bottom:none; }
+  .amount-grid { grid-template-columns:1fr 1fr; }
+  .field-row, .field-row.three { grid-template-columns:1fr; }
+  .give-grid { grid-template-columns:1fr; }
+  .impact-nums { grid-template-columns:1fr 1fr; }
+  .impact-band { padding:56px 24px; }
+  .pay-panel { padding:22px 18px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">Dar Al-<span>Sakina</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li class="nav-item has-dropdown">
+      <a href="index.html#community">Community</a>
+      <div class="dropdown">
+        <div class="dd-header"><strong>Our Homes</strong><small>20 thoughtfully designed residences</small></div>
+        <div class="dd-list">
+          <a href="single-family-homes.html" class="dd-item">
+            <div class="dd-thumb"><img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=180&q=80&fit=crop" alt="" loading="lazy"/></div>
+            <div class="dd-body"><div class="dd-title">&#x1F3E1; Single-Family Homes</div><div class="dd-desc">Private, accessible homes with wide doorways and step-free entries.</div></div>
+          </a>
+          <div class="dd-sep"></div>
+          <a href="private-gardens.html" class="dd-item">
+            <div class="dd-thumb"><img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=180&q=80&fit=crop" alt="" loading="lazy"/></div>
+            <div class="dd-body"><div class="dd-title">&#x1F33F; Private Gardens</div><div class="dd-desc">A personal garden with every home for morning dhikr and quiet reflection.</div></div>
+          </a>
+          <div class="dd-sep"></div>
+          <a href="qibla-oriented-design.html" class="dd-item">
+            <div class="dd-thumb">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Kaaba_Mirror_ed._edit.jpg/180px-Kaaba_Mirror_ed._edit.jpg" alt="Kaaba, Mecca" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"/>
+            </div>
+            <div class="dd-body"><div class="dd-title">&#x1F54C; Qibla-Oriented Design</div><div class="dd-desc">Prayer rooms aligned to the qibla with a dedicated wudu area.</div></div>
+          </a>
+          <div class="dd-sep"></div>
+          <a href="accessible-living.html" class="dd-item">
+            <div class="dd-thumb"><img src="https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?w=180&q=80&fit=crop" alt="" loading="lazy"/></div>
+            <div class="dd-body"><div class="dd-title">&#x267F; Accessible Living</div><div class="dd-desc">Grab bars, curbless showers, and wide hallways for comfort and dignity.</div></div>
+          </a>
+        </div>
+        <div class="dd-footer"><small>Boutique community &#xB7; Maryland</small><a href="index.html#community">View all &#8594;</a></div>
+      </div>
+    </li>
+    <li><a href="index.html#amenities">Amenities</a></li>
+    <li><a href="index.html#life">Daily Life</a></li>
+    <li><a href="payment.html" class="active">Payment</a></li>
+    <li><a href="index.html#interest">Express Interest</a></li>
+  </ul>
+</nav>
+
+<!-- ══ HERO ══ -->
+<header class="page-hero">
+  <div class="page-hero-img hero-img-pay"></div>
+  <div class="page-hero-content">
+    <div class="hero-crumb">
+      <a href="index.html">Dar Al-Sakina</a><span class="sep">&#8250;</span>
+      Payment &amp; Donations
+    </div>
+    <h1>Support the<em style="color:var(--gold)">House of Tranquility.</em></h1>
+    <p>Whether you are a resident paying your monthly fee or a supporter contributing sadaqah jariyah, every payment directly sustains this community for Maryland&#x2019;s Muslim elders.</p>
+  </div>
+</header>
+
+<!-- ══ WHY GIVE ══ -->
+<div class="page-section" style="background:var(--cream)">
+  <div class="inner">
+    <div class="reveal">
+      <span class="label">Your Contribution</span>
+      <h2 class="heading">What Your Payment Supports</h2>
+      <div class="rule"></div>
+      <p class="body-text">Dar Al-Sakina is a self-sustaining community rooted in the values of care, dignity, and faith. Resident fees cover operational costs; donations and sadaqah fund scholarships for elders of limited means and expand community programming.</p>
+    </div>
+    <div class="give-grid">
+      <div class="give-card reveal">
+        <div class="give-icon">&#x1F3E1;</div>
+        <h3>Resident Monthly Fees</h3>
+        <p>Monthly fees cover maintenance, on-site staff, utilities, and communal programming &#8212; ensuring a serene, well-run home for every resident.</p>
+      </div>
+      <div class="give-card reveal">
+        <div class="give-icon">&#x1F91D;</div>
+        <h3>One-Time Donations</h3>
+        <p>Your gift helps complete shared amenities &#8212; the community hall, accessible gardens, walking paths, and the on-site medical consultation suite.</p>
+      </div>
+      <div class="give-card reveal">
+        <div class="give-icon">&#x2728;</div>
+        <h3>Sadaqah Jariyah</h3>
+        <p>A recurring monthly gift that continues giving. Fund a sponsored place for an elder of limited means and earn the ongoing reward of continuous charity.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PAYMENT FORM ══ -->
+<div class="page-section" style="background:#fff">
+  <div class="inner" style="max-width:780px; margin:0 auto">
+    <div class="reveal">
+      <span class="label">Make a Payment</span>
+      <h2 class="heading">Choose Your Payment Type</h2>
+      <div class="rule"></div>
+      <p class="body-text" style="margin-bottom:40px">Select the category that applies, choose an amount, and complete the secure form. All transactions are 256-bit SSL encrypted.</p>
+    </div>
+
+    <!-- TABS -->
+    <div class="pay-tabs" role="tablist">
+      <button class="pay-tab active" onclick="switchTab('monthly', this)">
+        <span class="tab-icon">&#x1F4C5;</span>Monthly Fee
+        <span class="tab-sub">Current residents</span>
+      </button>
+      <button class="pay-tab" onclick="switchTab('donation', this)">
+        <span class="tab-icon">&#x1F91D;</span>Donation
+        <span class="tab-sub">One-time gift</span>
+      </button>
+      <button class="pay-tab" onclick="switchTab('sadaqah', this)">
+        <span class="tab-icon">&#x2728;</span>Sadaqah Jariyah
+        <span class="tab-sub">Recurring charity</span>
+      </button>
+      <button class="pay-tab" onclick="switchTab('check', this)">
+        <span class="tab-icon">&#x1F4EE;</span>Check / Wire
+        <span class="tab-sub">Bank or mail</span>
+      </button>
+    </div>
+
+    <!-- ── PANEL: MONTHLY ── -->
+    <div class="pay-panel" id="panel-monthly">
+      <p style="font-size:.82rem;color:var(--text-light);margin-bottom:20px;line-height:1.7">Current monthly resident fee: <strong style="color:var(--teal-dark)">$3,200/month</strong> per unit. Contact us to verify your specific rate.</p>
+      <div class="amount-grid">
+        <div class="amount-card selected" onclick="pickAmt(this,'3200','monthly')"><span class="amt">$3,200</span><span class="amt-label">Standard</span></div>
+        <div class="amount-card" onclick="pickAmt(this,'3600','monthly')"><span class="amt">$3,600</span><span class="amt-label">Premium unit</span></div>
+        <div class="amount-card" onclick="pickAmt(this,'4000','monthly')"><span class="amt">$4,000</span><span class="amt-label">Corner / garden</span></div>
+        <div class="amount-card" onclick="pickAmt(this,'custom','monthly')"><span class="amt">Custom</span><span class="amt-label">Enter below</span></div>
+      </div>
+      <div id="custom-monthly" class="custom-amount-row" style="display:none">
+        <span class="custom-prefix">$</span>
+        <input type="number" placeholder="Enter your fee" min="1"/>
+      </div>
+      <p style="font-size:.73rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-light);margin-bottom:12px;font-weight:500">Payment Method</p>
+      <div class="pay-methods">
+        <div class="pay-method selected" onclick="pickMethod(this)"><span class="method-icon">&#x1F4B3;</span><span><span class="method-name">Credit / Debit Card</span><span class="method-sub">Visa, Mastercard, Amex</span></span></div>
+        <div class="pay-method" onclick="pickMethod(this)"><span class="method-icon">&#x1F3E6;</span><span><span class="method-name">ACH Bank Transfer</span><span class="method-sub">US accounts, 2&#8211;3 days</span></span></div>
+        <div class="pay-method" onclick="pickMethod(this)"><span class="method-icon">&#x1F4B8;</span><span><span class="method-name">PayPal</span><span class="method-sub">Fast &amp; familiar</span></span></div>
+      </div>
+      <div class="secure-row"><span>&#x1F512;</span><p><strong>Your payment is secured with 256-bit SSL encryption.</strong> Card details are never stored on our servers &#8212; all processing is handled by Stripe. This form is a <em>placeholder</em> pending Stripe integration.</p></div>
+      <div class="field-row full"><div class="field-group"><label>Full Name on Card</label><input type="text" placeholder="e.g. Fatima Al-Rashid"/></div></div>
+      <div class="field-row full"><div class="field-group"><label>Card Number</label><div class="icon-wrap"><span class="field-icon">&#x1F4B3;</span><input type="text" placeholder="1234  5678  9012  3456" maxlength="22" class="card-num"/></div></div></div>
+      <div class="field-row three">
+        <div class="field-group"><label>Expiry</label><input type="text" placeholder="MM / YY" maxlength="7"/></div>
+        <div class="field-group"><label>CVV</label><input type="text" placeholder="123" maxlength="4"/></div>
+        <div class="field-group"><label>ZIP</label><input type="text" placeholder="20901" maxlength="10"/></div>
+      </div>
+      <div class="field-row">
+        <div class="field-group"><label>Resident Unit Number</label><input type="text" placeholder="e.g. Unit 07"/></div>
+        <div class="field-group"><label>Email for Receipt</label><input type="email" placeholder="you@example.com"/></div>
+      </div>
+      <button class="pay-submit" onclick="doSubmit(this)">&#x1F512;&nbsp; Submit Secure Payment</button>
+      <p class="submit-note">Questions? Email <a href="mailto:payments@daralsakina.org" style="color:var(--teal)">payments@daralsakina.org</a></p>
+    </div>
+
+    <!-- ── PANEL: DONATION ── -->
+    <div class="pay-panel" id="panel-donation" style="display:none">
+      <p style="font-size:.82rem;color:var(--text-light);margin-bottom:20px;line-height:1.7">Your one-time donation supports construction, accessibility upgrades, and scholarship slots for elders of limited means. All gifts are acknowledged with a personal letter.</p>
+      <div class="amount-grid">
+        <div class="amount-card selected" onclick="pickAmt(this,'100','donation')"><span class="amt">$100</span><span class="amt-label">Community friend</span></div>
+        <div class="amount-card" onclick="pickAmt(this,'500','donation')"><span class="amt">$500</span><span class="amt-label">Benefactor</span></div>
+        <div class="amount-card" onclick="pickAmt(this,'1000','donation')"><span class="amt">$1,000</span><span class="amt-label">Founding patron</span></div>
+        <div class="amount-card" onclick="pickAmt(this,'custom','donation')"><span class="amt">Custom</span><span class="amt-label">Your gift</span></div>
+      </div>
+      <div id="custom-donation" class="custom-amount-row" style="display:none">
+        <span class="custom-prefix">$</span>
+        <input type="number" placeholder="Enter amount" min="1"/>
+      </div>
+      <div class="pay-methods">
+        <div class="pay-method selected" onclick="pickMethod(this)"><span class="method-icon">&#x1F4B3;</span><span><span class="method-name">Credit / Debit Card</span><span class="method-sub">Visa, Mastercard, Amex</span></span></div>
+        <div class="pay-method" onclick="pickMethod(this)"><span class="method-icon">&#x1F4B8;</span><span><span class="method-name">PayPal</span><span class="method-sub">Fast &amp; familiar</span></span></div>
+        <div class="pay-method" onclick="pickMethod(this)"><span class="method-icon">&#x26A1;</span><span><span class="method-name">Zelle</span><span class="method-sub">Instant bank transfer</span></span></div>
+      </div>
+      <div class="secure-row"><span>&#x1F512;</span><p><strong>Secure, encrypted processing.</strong> Donations are not currently tax-deductible; we are pursuing 501(c)(3) status and will notify all donors once approved. This form is a <em>placeholder</em> pending Stripe integration.</p></div>
+      <div class="field-row full"><div class="field-group"><label>Full Name</label><input type="text" placeholder="Your full name"/></div></div>
+      <div class="field-row full"><div class="field-group"><label>Card Number</label><div class="icon-wrap"><span class="field-icon">&#x1F4B3;</span><input type="text" placeholder="1234  5678  9012  3456" maxlength="22" class="card-num"/></div></div></div>
+      <div class="field-row three">
+        <div class="field-group"><label>Expiry</label><input type="text" placeholder="MM / YY" maxlength="7"/></div>
+        <div class="field-group"><label>CVV</label><input type="text" placeholder="123" maxlength="4"/></div>
+        <div class="field-group"><label>ZIP</label><input type="text" placeholder="20901" maxlength="10"/></div>
+      </div>
+      <div class="field-row full"><div class="field-group"><label>Email for Receipt</label><input type="email" placeholder="you@example.com"/></div></div>
+      <div class="field-row full"><div class="field-group"><label>Dedication / Message (optional)</label><input type="text" placeholder="e.g. In memory of my mother, Khadijah …"/></div></div>
+      <button class="pay-submit" onclick="doSubmit(this)">&#x1F512;&nbsp; Submit Donation Securely</button>
+      <p class="submit-note">Thank you for your generosity. May Allah bless your giving.</p>
+    </div>
+
+    <!-- ── PANEL: SADAQAH ── -->
+    <div class="pay-panel" id="panel-sadaqah" style="display:none">
+      <p style="font-size:.82rem;color:var(--text-light);margin-bottom:20px;line-height:1.7">A recurring gift that continues giving. Sustain a place of dignity and worship for Muslim elders long after your contribution &#8212; and earn the reward of ongoing charity in sha&#x02BC; Allah.</p>
+      <div style="background:linear-gradient(135deg,#1e4a4a,#2d6a6a);border-radius:4px;padding:22px 26px;margin-bottom:24px">
+        <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--gold-light);margin-bottom:6px">&#x201C;When a person dies, their deeds come to an end except for three&#x2026;&#x201D;</p>
+        <p style="font-size:.76rem;color:rgba(255,255,255,.5);letter-spacing:.06em;margin:0">Hadith &mdash; Sahih Muslim 1631 &middot; Sadaqah Jariyah is one of those three</p>
+      </div>
+      <div class="amount-grid">
+        <div class="amount-card selected" onclick="pickAmt(this,'25','sadaqah')"><span class="amt">$25</span><span class="amt-label">Per month</span></div>
+        <div class="amount-card" onclick="pickAmt(this,'50','sadaqah')"><span class="amt">$50</span><span class="amt-label">Per month</span></div>
+        <div class="amount-card" onclick="pickAmt(this,'100','sadaqah')"><span class="amt">$100</span><span class="amt-label">Per month</span></div>
+        <div class="amount-card" onclick="pickAmt(this,'custom','sadaqah')"><span class="amt">Custom</span><span class="amt-label">Any amount</span></div>
+      </div>
+      <div id="custom-sadaqah" class="custom-amount-row" style="display:none">
+        <span class="custom-prefix">$</span>
+        <input type="number" placeholder="Monthly amount" min="1"/>
+      </div>
+      <div class="pay-methods">
+        <div class="pay-method selected" onclick="pickMethod(this)"><span class="method-icon">&#x1F4B3;</span><span><span class="method-name">Card (Auto-charged monthly)</span><span class="method-sub">Cancel anytime</span></span></div>
+        <div class="pay-method" onclick="pickMethod(this)"><span class="method-icon">&#x1F3E6;</span><span><span class="method-name">ACH Auto-debit</span><span class="method-sub">US bank accounts</span></span></div>
+      </div>
+      <div class="secure-row"><span>&#x1F512;</span><p><strong>Recurring charges via Stripe.</strong> You receive an email receipt after every charge. Cancel at any time &#8212; no penalty, no questions. This form is a <em>placeholder</em> pending Stripe integration.</p></div>
+      <div class="field-row full"><div class="field-group"><label>Full Name</label><input type="text" placeholder="Your full name"/></div></div>
+      <div class="field-row full"><div class="field-group"><label>Card Number</label><div class="icon-wrap"><span class="field-icon">&#x1F4B3;</span><input type="text" placeholder="1234  5678  9012  3456" maxlength="22" class="card-num"/></div></div></div>
+      <div class="field-row three">
+        <div class="field-group"><label>Expiry</label><input type="text" placeholder="MM / YY" maxlength="7"/></div>
+        <div class="field-group"><label>CVV</label><input type="text" placeholder="123" maxlength="4"/></div>
+        <div class="field-group"><label>ZIP</label><input type="text" placeholder="20901" maxlength="10"/></div>
+      </div>
+      <div class="field-row full"><div class="field-group"><label>Email for Receipts</label><input type="email" placeholder="you@example.com"/></div></div>
+      <button class="pay-submit" onclick="doSubmit(this)">&#x2728;&nbsp; Begin Monthly Sadaqah</button>
+      <p class="submit-note">Barak Allahu feekum. May this be a continuous source of mercy.</p>
+    </div>
+
+    <!-- ── PANEL: CHECK / WIRE ── -->
+    <div class="pay-panel" id="panel-check" style="display:none">
+      <p style="font-size:.82rem;color:var(--text-light);margin-bottom:28px;line-height:1.7">Prefer to pay by check or wire transfer? Use the information below. Include your name and unit number (residents) or &#x201C;Donation&#x201D; in the memo line.</p>
+      <div class="bank-info">
+        <h4>&#x1F3E6; Bank / Wire Transfer Details</h4>
+        <div class="bank-row"><span class="b-label">Bank Name</span><span class="b-val">First National Islamic Bank<button class="copy-btn" onclick="copyText('First National Islamic Bank')">Copy</button></span></div>
+        <div class="bank-row"><span class="b-label">Account Name</span><span class="b-val">Dar Al-Sakina LLC<button class="copy-btn" onclick="copyText('Dar Al-Sakina LLC')">Copy</button></span></div>
+        <div class="bank-row"><span class="b-label">Routing Number</span><span class="b-val" style="color:var(--text-light);font-style:italic">Provided on request</span></div>
+        <div class="bank-row"><span class="b-label">Account Number</span><span class="b-val" style="color:var(--text-light);font-style:italic">Provided on request</span></div>
+        <div class="bank-row"><span class="b-label">Zelle</span><span class="b-val">payments@daralsakina.org<button class="copy-btn" onclick="copyText('payments@daralsakina.org')">Copy</button></span></div>
+      </div>
+      <div class="check-box">
+        <h4>&#x2709;&#xFE0F; Mailing a Check</h4>
+        <div class="check-step"><div class="step-num">1</div><p>Make check payable to <strong>Dar Al-Sakina LLC</strong>.</p></div>
+        <div class="check-step"><div class="step-num">2</div><p>Write your unit number (residents) or <strong>&#x201C;Donation&#x201D;</strong> in the memo line.</p></div>
+        <div class="check-step"><div class="step-num">3</div><p>Mail to: <strong>Dar Al-Sakina &#xB7; [Full Address Provided on Request] &#xB7; Maryland, USA</strong></p></div>
+        <div class="check-step"><div class="step-num">4</div><p>Email <a href="mailto:payments@daralsakina.org" style="color:var(--teal)">payments@daralsakina.org</a> to confirm your check is on its way.</p></div>
+      </div>
+      <div style="margin-top:28px;text-align:center">
+        <a href="mailto:payments@daralsakina.org" class="btn btn-outline-teal">&#x2709;&#xFE0F;&nbsp; Email Payments Team for Details</a>
+      </div>
+    </div>
+
+  </div><!-- /inner -->
+</div><!-- /section -->
+
+<!-- ══ IMPACT BAND ══ -->
+<div class="impact-band">
+  <div class="inner">
+    <div class="reveal">
+      <span class="label" style="color:var(--gold-light)">Community Impact</span>
+      <h2 class="heading" style="color:#fff">Where Your Money Goes</h2>
+      <div class="rule"></div>
+      <p class="body-text" style="color:rgba(255,255,255,.55)">Every dollar sustains a living, breathing community. Here is how resident fees and donations are allocated each year.</p>
+    </div>
+    <div class="impact-nums">
+      <div class="impact-num reveal"><span class="i-num">48%</span><span class="i-label">Staff &amp; Care Services</span></div>
+      <div class="impact-num reveal"><span class="i-num">22%</span><span class="i-label">Facilities &amp; Maintenance</span></div>
+      <div class="impact-num reveal"><span class="i-num">18%</span><span class="i-label">Community Programs</span></div>
+      <div class="impact-num reveal"><span class="i-num">12%</span><span class="i-label">Scholarships &amp; Reserves</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ FAQ ══ -->
+<div class="page-section" style="background:var(--cream)">
+  <div class="inner" style="max-width:760px;margin:0 auto">
+    <div class="reveal"><span class="label">Common Questions</span><h2 class="heading">Payment FAQ</h2><div class="rule"></div></div>
+    <div class="reveal" style="margin-top:36px">
+      <div class="faq-item">
+        <h4>Is my payment information secure?</h4>
+        <p>Yes. All card processing will be handled by Stripe, which is PCI DSS Level 1 compliant &#8212; the highest standard in payment security. We never store card numbers on our servers.</p>
+      </div>
+      <div class="faq-item">
+        <h4>Are donations tax-deductible?</h4>
+        <p>We are currently pursuing 501(c)(3) tax-exempt status. Donations are not currently tax-deductible, but we will notify all donors and provide amended receipts once our status is approved.</p>
+      </div>
+      <div class="faq-item">
+        <h4>When is the monthly resident fee due?</h4>
+        <p>Monthly resident fees are due on the 1st of each month. Auto-pay enrolled residents receive a reminder email 3 days prior. A 5-day grace period applies before any late fee is assessed.</p>
+      </div>
+      <div class="faq-item">
+        <h4>Can I cancel a sadaqah subscription?</h4>
+        <p>Yes &#8212; at any time, with no fees or penalties. Simply email <a href="mailto:payments@daralsakina.org" style="color:var(--teal)">payments@daralsakina.org</a> or cancel via the link in your monthly receipt email.</p>
+      </div>
+      <div class="faq-item">
+        <h4>The form says &#x201C;placeholder&#x201D; &#8212; can I actually pay now?</h4>
+        <p>The payment forms are design-ready placeholders pending integration with Stripe. To arrange payment immediately, please use the wire transfer details above or email our payments team directly.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ CTA ══ -->
+<div class="page-section" style="background:#fff">
+  <div class="cta-block reveal">
+    <span class="label">Get in Touch</span>
+    <h2 class="heading">Questions About Your Payment?</h2>
+    <div class="rule" style="margin:18px auto"></div>
+    <p class="body-text" style="text-align:center;margin:0 auto">For billing questions, custom giving plans, or to arrange a wire transfer, our team responds within one business day.</p>
+    <div class="cta-btns">
+      <a href="mailto:payments@daralsakina.org" class="btn btn-gold">&#x2709;&#xFE0F;&nbsp; Email Payments Team</a>
+      <a href="index.html#interest" class="btn btn-outline-teal">Resident Interest Form</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">Dar Al-<span>Sakina</span></div>
+  <div class="footer-tagline">A House of Tranquility &#xB7; Maryland</div>
+  <ul class="footer-nav">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="single-family-homes.html">Homes</a></li>
+    <li><a href="private-gardens.html">Gardens</a></li>
+    <li><a href="qibla-oriented-design.html">Prayer Rooms</a></li>
+    <li><a href="accessible-living.html">Accessibility</a></li>
+    <li><a href="index.html#amenities">Amenities</a></li>
+    <li><a href="payment.html">Payment</a></li>
+    <li><a href="index.html#interest">Contact</a></li>
+  </ul>
+  <div class="footer-copy">&#169; 2025 Dar Al-Sakina. All rights reserved. &#xB7; Maryland, USA</div>
+</footer>
+
+<script>
+/* ── TAB SWITCHING ── */
+function switchTab(id, btn) {
+  ['monthly','donation','sadaqah','check'].forEach(function(t) {
+    document.getElementById('panel-' + t).style.display = (t === id) ? '' : 'none';
+  });
+  document.querySelectorAll('.pay-tab').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+}
+
+/* ── AMOUNT SELECTION ── */
+function pickAmt(el, val, section) {
+  el.closest('.amount-grid').querySelectorAll('.amount-card').forEach(function(c) { c.classList.remove('selected'); });
+  el.classList.add('selected');
+  var row = document.getElementById('custom-' + section);
+  if (row) row.style.display = (val === 'custom') ? 'flex' : 'none';
+}
+
+/* ── METHOD SELECTION ── */
+function pickMethod(el) {
+  el.closest('.pay-methods').querySelectorAll('.pay-method').forEach(function(m) { m.classList.remove('selected'); });
+  el.classList.add('selected');
+}
+
+/* ── SUBMIT PLACEHOLDER ── */
+function doSubmit(btn) {
+  var orig = btn.innerHTML;
+  btn.innerHTML = '&#x23F3; Processing&#x2026;';
+  btn.disabled = true;
+  setTimeout(function() {
+    btn.innerHTML = '&#x2705; Submitted &#x2014; Jazak Allah Khayran!';
+    btn.style.background = '#5a8a6a';
+  }, 1800);
+}
+
+/* ── COPY TEXT ── */
+function copyText(text) {
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(text).then(function() { toast('Copied: ' + text); });
+  }
+}
+function toast(msg) {
+  var t = document.createElement('div');
+  t.textContent = msg;
+  Object.assign(t.style, {
+    position:'fixed', bottom:'28px', left:'50%', transform:'translateX(-50%)',
+    background:'#1e4a4a', color:'#fff', padding:'10px 22px', borderRadius:'3px',
+    fontSize:'.82rem', zIndex:'9999', boxShadow:'0 8px 24px rgba(0,0,0,.18)',
+    letterSpacing:'.06em', transition:'opacity .3s'
+  });
+  document.body.appendChild(t);
+  setTimeout(function() { t.style.opacity = '0'; setTimeout(function() { t.remove(); }, 300); }, 2200);
+}
+
+/* ── CARD NUMBER FORMATTING ── */
+document.querySelectorAll('.card-num').forEach(function(inp) {
+  inp.addEventListener('input', function() {
+    var v = this.value.replace(/\D/g, '').substring(0, 16);
+    this.value = v.replace(/(.{4})/g, '$1  ').trim();
+  });
+});
+
+/* ── EXPIRY FORMATTING ── */
+document.querySelectorAll('input[placeholder="MM / YY"]').forEach(function(inp) {
+  inp.addEventListener('input', function() {
+    var v = this.value.replace(/\D/g, '').substring(0, 4);
+    if (v.length >= 3) v = v.substring(0, 2) + ' / ' + v.substring(2);
+    this.value = v;
+  });
+});
+
+/* ── NAV SCROLL ── */
+var navbar = document.getElementById('navbar');
+window.addEventListener('scroll', function() { navbar.classList.toggle('scrolled', window.scrollY > 60); });
+
+/* ── REVEAL ── */
+var obs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e, i) {
+    if (e.isIntersecting) { setTimeout(function() { e.target.classList.add('visible'); }, i * 70); obs.unobserve(e.target); }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(function(el) { obs.observe(el); });
+</script>
+</body>
+</html>
